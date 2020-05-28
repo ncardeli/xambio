@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+	@apply font-bold py-2 px-4 rounded;
+}
+
+.pill-input:checked + label {
+	@apply bg-opacity-100;
+}
+
+input:invalid {
+	@apply border-red-600 border-dashed;
+}

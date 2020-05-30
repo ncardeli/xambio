@@ -28,7 +28,7 @@ function Waiting() {
 				<Button
 					type={type}
 					buttonType="button"
-					className="block mt-8 mx-auto"
+					className="block mt-8 width-full"
 					onClick={onCancel}
 				>
 					Cancelar oferta

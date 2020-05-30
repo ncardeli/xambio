@@ -14,6 +14,7 @@ function Sell({ exchangeRate }) {
 				type: "sell",
 				dollars: value,
 				local: value * exchangeRate,
+				validUntil: new Date().getTime() + 6000,
 			})
 		);
 	};

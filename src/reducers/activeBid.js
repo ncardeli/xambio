@@ -20,8 +20,12 @@ function activeBidReducer(state = INITIAL_STATE, action) {
 }
 
 function applySetActiveBid(_, action) {
+	const { type, dollars, local, validUntil } = action.payload;
 	return {
-		...action.payload,
+		type,
+		dollars,
+		local,
+		validUntil,
 		error: null,
 	};
 }

@@ -14,6 +14,7 @@ function Buy({ exchangeRate }) {
 				type: "buy",
 				dollars: value,
 				local: value * exchangeRate,
+				validUntil: new Date().getTime() + 6000,
 			})
 		);
 	};

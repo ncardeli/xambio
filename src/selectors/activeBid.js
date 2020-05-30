@@ -2,4 +2,13 @@ function getActiveBid(state) {
 	return state.activeBid;
 }
 
-export { getActiveBid };
+function hasActiveBid(state) {
+	const activeBid = getActiveBid(state);
+	const now = new Date().getTime();
+	if (activeBid !== null) {
+		return now < activeBid.validUntil;
+	}
+	return false;
+}
+
+export { getActiveBid, hasActiveBid };

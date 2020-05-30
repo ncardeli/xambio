@@ -11,11 +11,11 @@ import Home from "./Home";
 import Sell from "./Sell";
 import Waiting from "./Waiting";
 import { useSelector } from "react-redux";
-import { getActiveBid } from "../selectors/activeBid";
+import { hasActiveBid as hasActiveBidSelector } from "../selectors/activeBid";
 
 function App() {
 	const [exchangeRate] = useState(42.5);
-	const activeBid = useSelector(getActiveBid);
+	const hasActiveBid = useSelector(hasActiveBidSelector);
 
 	return (
 		<Router>
@@ -23,7 +23,7 @@ function App() {
 				<header className="App-header"></header>
 				<main>
 					<Switch>
-						{activeBid && (
+						{hasActiveBid && (
 							<Route path="/(.+)">
 								<Redirect to="/"></Redirect>
 							</Route>
@@ -35,7 +35,7 @@ function App() {
 							<Buy exchangeRate={exchangeRate} />
 						</Route>
 						<Route path="/">
-							{activeBid ? (
+							{hasActiveBid ? (
 								<Waiting></Waiting>
 							) : (
 								<Home exchangeRate={exchangeRate} />

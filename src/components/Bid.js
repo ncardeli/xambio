@@ -4,6 +4,7 @@ import { Pills } from "./Pills";
 import arrowDown from "../assets/arrow-down.svg";
 import { currencyToFormattedString } from "../util/currency";
 import { getClassesByType } from "./styling";
+import { Button, TextButton } from "./Button";
 
 function Bid({
 	buttonLabel,
@@ -74,13 +75,22 @@ function Bid({
 						{currencyToFormattedString("UYU", value * exchangeRate)}
 					</div>
 				</div>
-				<button
-					type="submit"
-					className={`btn block mx-auto ${textColorInverse} bg-white disabled:opacity-75 disabled:cursor-not-allowed`}
+				<Button
+					type={type}
+					buttonType="submit"
 					disabled={value <= 0}
+					className="block my-2 w-full"
 				>
 					{buttonLabel}
-				</button>
+				</Button>
+				<TextButton
+					type={type}
+					buttonType="submit"
+					disabled={value <= 0}
+					className="block text-sm my-2 w-full"
+				>
+					Cancelar
+				</TextButton>
 			</form>
 		</Panel>
 	);

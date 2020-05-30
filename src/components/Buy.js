@@ -1,11 +1,21 @@
 import React from "react";
 import Bid from "./Bid";
+import { useDispatch } from "react-redux";
+import { doSetActiveBid } from "../actions/activeBid";
 
 const PREFIXED_AMOUNTS = [100, 500, 1000, 2000];
 
 function Buy({ exchangeRate }) {
+	const dispatch = useDispatch();
+
 	const onSubmit = (value) => {
-		console.log(value);
+		dispatch(
+			doSetActiveBid({
+				type: "buy",
+				dollars: value,
+				local: value * exchangeRate,
+			})
+		);
 	};
 
 	return (

@@ -2,14 +2,22 @@ import React from "react";
 import Panel from "./Panel";
 import { Button } from "./Button";
 import { currencyToFormattedString } from "../util/currency";
+import { useSelector, useDispatch } from "react-redux";
+import { doClearActiveBid } from "../actions/activeBid";
 
-function Waiting({ bid }) {
-	const { type, dollars, local } = bid;
+function Waiting() {
+	const dispatch = useDispatch();
+
+	const { type, dollars, local } = useSelector((state) => state.activeBid);
 	const formattedDollars = currencyToFormattedString("USD", dollars);
 	const formattedLocal = currencyToFormattedString("UYU", local);
 	const { title, subTitle } = getMessages(type);
 	const amountToReceive = type === "sell" ? formattedLocal : formattedDollars;
 	const amountToSend = type === "sell" ? formattedDollars : formattedLocal;
+
+	const onCancel = () => {
+		dispatch(doClearActiveBid());
+	};
 
 	return (
 		<Panel title={title} type={type}>
@@ -17,7 +25,12 @@ function Waiting({ bid }) {
 				<h3 className="mb-2 mx-auto">{subTitle}</h3>
 				<Amount text="Recibirás:" amount={amountToReceive}></Amount>
 				<Amount text="Entregarás:" amount={amountToSend}></Amount>
-				<Button type={type} buttonType="button" className="block mt-8 mx-auto">
+				<Button
+					type={type}
+					buttonType="button"
+					className="block mt-8 mx-auto"
+					onClick={onCancel}
+				>
 					Cancelar oferta
 				</Button>
 			</section>

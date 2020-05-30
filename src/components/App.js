@@ -10,12 +10,11 @@ import Buy from "./Buy";
 import Home from "./Home";
 import Sell from "./Sell";
 import Waiting from "./Waiting";
+import { useSelector } from "react-redux";
 
 function App() {
 	const [exchangeRate] = useState(42.5);
-	//const [activeBid] = useState({ dollars: 500, local: 21250, type: "sell" });
-	//const [activeBid] = useState({ dollars: 500, local: 21250, type: "buy" });
-	const activeBid = null;
+	const activeBid = useSelector((state) => state.activeBid);
 
 	return (
 		<Router>
@@ -36,7 +35,7 @@ function App() {
 						</Route>
 						<Route path="/">
 							{activeBid ? (
-								<Waiting bid={activeBid}></Waiting>
+								<Waiting></Waiting>
 							) : (
 								<Home exchangeRate={exchangeRate} />
 							)}

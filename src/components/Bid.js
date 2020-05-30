@@ -4,7 +4,7 @@ import { Pills } from "./Pills";
 import arrowDown from "../assets/arrow-down.svg";
 import { currencyToFormattedString } from "../util/currency";
 import { getClassesByType } from "./styling";
-import { Button, TextButton } from "./Button";
+import { Button, ButtonLink } from "./Button";
 
 function Bid({
 	buttonLabel,
@@ -83,14 +83,9 @@ function Bid({
 				>
 					{buttonLabel}
 				</Button>
-				<TextButton
-					type={type}
-					buttonType="submit"
-					disabled={value <= 0}
-					className="block text-sm my-2 w-full"
-				>
+				<ButtonLink to="/" className="block text-sm my-2 w-full text-center">
 					Cancelar
-				</TextButton>
+				</ButtonLink>
 			</form>
 		</Panel>
 	);

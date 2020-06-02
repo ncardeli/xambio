@@ -13,9 +13,10 @@ import Waiting from "./Waiting";
 import Match from "./Match";
 import { useSelector } from "react-redux";
 import { hasActiveBid, isActiveBidMatched } from "../selectors/activeBid";
+import { getExchangeRate } from "../selectors/exchangeRate";
 
 function App() {
-	const [exchangeRate] = useState(42.5);
+	const exchangeRate = useSelector(getExchangeRate);
 	const isActive = useSelector(hasActiveBid);
 	const isMatched = useSelector(isActiveBidMatched);
 

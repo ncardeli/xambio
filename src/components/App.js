@@ -10,12 +10,14 @@ import Buy from "./Buy";
 import Home from "./Home";
 import Sell from "./Sell";
 import Waiting from "./Waiting";
+import Match from "./Match";
 import { useSelector } from "react-redux";
-import { hasActiveBid as hasActiveBidSelector } from "../selectors/activeBid";
+import { hasActiveBid, isActiveBidMatched } from "../selectors/activeBid";
 
 function App() {
 	const [exchangeRate] = useState(42.5);
-	const hasActiveBid = useSelector(hasActiveBidSelector);
+	const isActive = useSelector(hasActiveBid);
+	const isMatched = useSelector(isActiveBidMatched);
 
 	return (
 		<Router>
@@ -23,7 +25,7 @@ function App() {
 				<header className="App-header"></header>
 				<main>
 					<Switch>
-						{hasActiveBid && (
+						{isActive && (
 							<Route path="/(.+)">
 								<Redirect to="/"></Redirect>
 							</Route>
@@ -35,8 +37,12 @@ function App() {
 							<Buy exchangeRate={exchangeRate} />
 						</Route>
 						<Route path="/">
-							{hasActiveBid ? (
-								<Waiting></Waiting>
+							{isActive ? (
+								isMatched ? (
+									<Match></Match>
+								) : (
+									<Waiting></Waiting>
+								)
 							) : (
 								<Home exchangeRate={exchangeRate} />
 							)}

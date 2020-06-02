@@ -1,17 +1,18 @@
 import {
-	ACTIVE_BID_SET,
+	ACTIVE_BID_START,
 	ACTIVE_BID_FETCH,
 	ACTIVE_BID_FETCH_ERROR,
-	ACTIVE_BID_CLEAR,
+	ACTIVE_BID_CANCEL,
+	ACTIVE_BID_MATCH,
 } from "../constants/actionTypes";
 
-const doSetActiveBid = (payload) => ({
-	type: ACTIVE_BID_SET,
+const doStartActiveBid = (payload) => ({
+	type: ACTIVE_BID_START,
 	payload,
 });
 
-const doClearActiveBid = (payload) => ({
-	type: ACTIVE_BID_CLEAR,
+const doCancelActiveBid = (payload) => ({
+	type: ACTIVE_BID_CANCEL,
 	payload,
 });
 
@@ -24,9 +25,15 @@ const doFetchErrorActiveBid = (error) => ({
 	error,
 });
 
+const doMatchActiveBid = (match) => ({
+	type: ACTIVE_BID_MATCH,
+	match,
+});
+
 export {
-	doSetActiveBid,
-	doClearActiveBid,
+	doStartActiveBid,
+	doCancelActiveBid,
 	doFetchActiveBid,
 	doFetchErrorActiveBid,
+	doMatchActiveBid,
 };

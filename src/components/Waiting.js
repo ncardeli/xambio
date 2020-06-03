@@ -31,7 +31,7 @@ function Waiting() {
 					className="block mt-8 width-full"
 					onClick={onCancel}
 				>
-					Cancelar oferta
+					Retirar oferta
 				</Button>
 			</section>
 		</Panel>

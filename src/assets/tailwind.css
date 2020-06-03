@@ -10,6 +10,12 @@
 	@apply bg-opacity-100;
 }
 
+.grid-form {
+	@apply grid;
+	@apply gap-4;
+	grid-template-columns: auto auto;
+}
+
 input:invalid {
 	@apply border-red-600 border-dashed;
 }

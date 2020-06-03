@@ -11,6 +11,7 @@ import Home from "./Home";
 import Sell from "./Sell";
 import Waiting from "./Waiting";
 import Match from "./Match";
+import Header from "./Header";
 import { useSelector } from "react-redux";
 import { hasActiveBid, isActiveBidMatched } from "../selectors/activeBid";
 import { getExchangeRate } from "../selectors/exchangeRate";
@@ -22,8 +23,8 @@ function App() {
 
 	return (
 		<Router>
+			<Header></Header>
 			<div className="App">
-				<header className="App-header"></header>
 				<main>
 					<Switch>
 						{isActive && (

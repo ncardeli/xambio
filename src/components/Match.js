@@ -52,7 +52,7 @@ function Match() {
 				className="block mt-8 width-full"
 				onClick={onCancel}
 			>
-				Retirar oferta
+				Finalizar
 			</Button>
 		</Panel>
 	);

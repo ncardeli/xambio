@@ -24,34 +24,32 @@ function App() {
 	return (
 		<Router>
 			<Header></Header>
-			<div className="App">
-				<main>
-					<Switch>
-						{isActive && (
-							<Route path="/(.+)">
-								<Redirect to="/"></Redirect>
-							</Route>
-						)}
-						<Route path="/sell">
-							<Sell exchangeRate={exchangeRate} />
+			<main className="App">
+				<Switch>
+					{isActive && (
+						<Route path="/(.+)">
+							<Redirect to="/"></Redirect>
 						</Route>
-						<Route path="/buy">
-							<Buy exchangeRate={exchangeRate} />
-						</Route>
-						<Route path="/">
-							{isActive ? (
-								isMatched ? (
-									<Match></Match>
-								) : (
-									<Waiting></Waiting>
-								)
+					)}
+					<Route path="/sell">
+						<Sell exchangeRate={exchangeRate} />
+					</Route>
+					<Route path="/buy">
+						<Buy exchangeRate={exchangeRate} />
+					</Route>
+					<Route path="/">
+						{isActive ? (
+							isMatched ? (
+								<Match></Match>
 							) : (
-								<Home exchangeRate={exchangeRate} />
-							)}
-						</Route>
-					</Switch>
-				</main>
-			</div>
+								<Waiting></Waiting>
+							)
+						) : (
+							<Home exchangeRate={exchangeRate} />
+						)}
+					</Route>
+				</Switch>
+			</main>
 		</Router>
 	);
 }

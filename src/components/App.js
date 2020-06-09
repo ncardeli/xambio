@@ -15,6 +15,7 @@ import Header from "./Header";
 import { useSelector } from "react-redux";
 import { hasActiveBid, isActiveBidMatched } from "../selectors/activeBid";
 import { getExchangeRate } from "../selectors/exchangeRate";
+import History from "./History";
 
 function App() {
 	const exchangeRate = useSelector(getExchangeRate);
@@ -26,6 +27,9 @@ function App() {
 			<Header></Header>
 			<main className="App">
 				<Switch>
+					<Route path="/history">
+						<History />
+					</Route>
 					{isActive && (
 						<Route path="/(.+)">
 							<Redirect to="/"></Redirect>

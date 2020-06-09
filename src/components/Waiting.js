@@ -1,7 +1,7 @@
 import React from "react";
 import Panel from "./Panel";
 import { Button } from "./Button";
-import { currencyToFormattedString } from "../util/currency";
+import { currencyToFormattedString } from "../util/localization";
 import { useSelector, useDispatch } from "react-redux";
 import { doCancelActiveBid } from "../actions/activeBid";
 

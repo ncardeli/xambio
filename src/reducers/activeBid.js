@@ -5,7 +5,23 @@ import {
 	ACTIVE_BID_MATCH,
 } from "../constants/actionTypes";
 
-const INITIAL_STATE = null;
+//const INITIAL_STATE = null;
+const INITIAL_STATE = {
+	type: "sell",
+	dollars: 1000,
+	local: 42500,
+	validUntil: Number.POSITIVE_INFINITY,
+	match: {
+		name: "Juan Perez",
+		email: "jperez@aa.aa.com",
+		phone: "099212474",
+		receivingAccount: "5882543",
+		receivingAccountBank: "Itaú",
+		depositAccount: "8182773",
+		depositAccountBank: "Itaú",
+	},
+	error: null,
+};
 
 function activeBidReducer(state = INITIAL_STATE, action) {
 	switch (action.type) {

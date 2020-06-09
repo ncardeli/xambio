@@ -2,9 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { getClassesByType } from "./styling";
 
-function LinkButton({ className, children, ...props }) {
+function ButtonLink({ type, className, children, ...props }) {
+	const { textColorInverse } = getClassesByType(type);
 	return (
-		<Link className={`btn ${className} text-white`} {...props}>
+		<Link
+			className={[
+				"btn text-center",
+				className,
+				textColorInverse,
+				"bg-white",
+			].join(" ")}
+			{...props}
+		>
 			{children}
 		</Link>
 	);
@@ -50,4 +59,4 @@ function BasicButton({ type, buttonType, className, children, ...props }) {
 	);
 }
 
-export { Button, TextButton, LinkButton as ButtonLink };
+export { Button, TextButton, ButtonLink };

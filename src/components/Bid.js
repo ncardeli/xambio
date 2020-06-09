@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Panel from "./Panel";
 import { Pills } from "./Pills";
 import arrowDown from "../assets/arrow-down.svg";
-import { currencyToFormattedString } from "../util/currency";
+import { currencyToFormattedString } from "../util/localization";
 import { getClassesByType } from "./styling";
 import { Button, ButtonLink } from "./Button";
 

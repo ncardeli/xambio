@@ -27,3 +27,9 @@ function getNumberFormatOptions(currency) {
 function getLocale() {
 	return "es-UY";
 }
+
+export function dateToFormattedString(date) {
+	return date.toLocaleDateString(getLocale(), {
+		dateStyle: "medium",
+	});
+}

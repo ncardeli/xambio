@@ -4,7 +4,7 @@ import { getActiveBid } from "../selectors/activeBid";
 import Panel from "./Panel";
 import { doCancelActiveBid } from "../actions/activeBid";
 import { Button } from "./Button";
-import { currencyToFormattedString } from "../util/currency";
+import { currencyToFormattedString } from "../util/localization";
 
 function Match() {
 	const dispatch = useDispatch();

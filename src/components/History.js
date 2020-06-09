@@ -24,7 +24,11 @@ function History() {
 						{history.map(({ id, dollars, match, status, timestamp, type }) => {
 							const operationTypeText = type === "sell" ? "Venta" : "Compra";
 							return (
-								<ListRow linkTo={getHistoryRoute(id)} onClick={onClick(id)}>
+								<ListRow
+									key={id}
+									linkTo={getHistoryRoute(id)}
+									onClick={onClick(id)}
+								>
 									<img
 										className="absolute h-full inset-y-0 left-0 w-4 ml-2 object-center"
 										src={status === "completed" ? check : cross}

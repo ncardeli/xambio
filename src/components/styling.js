@@ -28,9 +28,14 @@ function textColorInverseByType(type) {
 	return `text-${TEXT_COLOR_INVERSE_BY_TYPE[type]}`;
 }
 
+function borderColorByType(type) {
+	return `border-${BACKGROUND_COLOR_BY_TYPE[type]}`;
+}
+
 function getClassesByType(type) {
 	return {
 		backgroundColor: backgroundColorByType(type),
+		borderColor: borderColorByType(type),
 		textColor: textColorByType(type),
 		textColorInverse: textColorInverseByType(type),
 	};

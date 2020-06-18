@@ -4,6 +4,12 @@ const BACKGROUND_COLOR_BY_TYPE = {
 	main: "white",
 };
 
+const BACKGROUND_COLOR_INVERSE_BY_TYPE = {
+	sell: "white",
+	buy: "white",
+	main: "gray-900",
+};
+
 const TEXT_COLOR_BY_TYPE = {
 	sell: "white",
 	buy: "white",
@@ -18,6 +24,10 @@ const TEXT_COLOR_INVERSE_BY_TYPE = {
 
 function backgroundColorByType(type) {
 	return `bg-${BACKGROUND_COLOR_BY_TYPE[type]}`;
+}
+
+function backgroundColorInverseByType(type) {
+	return `bg-${BACKGROUND_COLOR_INVERSE_BY_TYPE[type]}`;
 }
 
 function textColorByType(type) {
@@ -35,6 +45,7 @@ function borderColorByType(type) {
 function getClassesByType(type) {
 	return {
 		backgroundColor: backgroundColorByType(type),
+		backgroundColorInverse: backgroundColorInverseByType(type),
 		borderColor: borderColorByType(type),
 		textColor: textColorByType(type),
 		textColorInverse: textColorInverseByType(type),

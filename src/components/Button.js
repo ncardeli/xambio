@@ -2,15 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { getClassesByType } from "./styling";
 
-function ButtonLink({ type, className, children, ...props }) {
-	const { textColorInverse } = getClassesByType(type);
+function ButtonLink({ type, mode, className, children, ...props }) {
+	const { textColor, backgroundColor } = getColorClasses(type, mode);
 	return (
 		<Link
 			className={[
 				"btn text-center",
 				className,
-				textColorInverse,
-				"bg-white",
+				textColor,
+				backgroundColor,
 			].join(" ")}
 			{...props}
 		>
@@ -19,18 +19,32 @@ function ButtonLink({ type, className, children, ...props }) {
 	);
 }
 
-function Button({ type, buttonType, className, children, ...props }) {
-	const { textColorInverse } = getClassesByType(type);
+function Button({ type, mode, buttonType, className, children, ...props }) {
+	const { textColor, backgroundColor } = getColorClasses(type, mode);
 
 	return (
 		<BasicButton
-			className={[className, textColorInverse, "bg-white"].join(" ")}
+			className={[className, textColor, backgroundColor].join(" ")}
 			type={buttonType}
 			{...props}
 		>
 			{children}
 		</BasicButton>
 	);
+}
+
+function getColorClasses(type, mode) {
+	const {
+		textColor,
+		textColorInverse,
+		backgroundColor,
+		backgroundColorInverse,
+	} = getClassesByType(type);
+	return {
+		textColor: mode === "inverse" ? textColorInverse : textColor,
+		backgroundColor:
+			mode === "inverse" ? backgroundColorInverse : backgroundColor,
+	};
 }
 
 function TextButton({ type, buttonType, className, children, ...props }) {

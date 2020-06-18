@@ -5,17 +5,15 @@ import { getClassesByType } from "./styling";
 
 function Home({ exchangeRate }) {
 	const { textColor } = getClassesByType("main");
-	const { backgroundColor: bgColorSell } = getClassesByType("sell");
-	const { backgroundColor: bgColorBuy } = getClassesByType("buy");
 
 	return (
 		<Panel type="main" title="¿Buscas vender o comprar dólares?">
 			<p className={`${textColor} mx-auto text-2xl`}>US$1 = ${exchangeRate}</p>
 			<nav className="flex justify-center mt-5">
-				<ButtonLink type="main" className={`mx-2 ${bgColorSell}`} to="/sell">
+				<ButtonLink type="sell" mode="normal" className={`mx-2`} to="/sell">
 					Vender
 				</ButtonLink>
-				<ButtonLink type="main" className={`mx-2 ${bgColorBuy}`} to="/buy">
+				<ButtonLink type="buy" mode="normal" className={`mx-2`} to="/buy">
 					Comprar
 				</ButtonLink>
 			</nav>

@@ -77,6 +77,7 @@ function Bid({
 				</div>
 				<Button
 					type={type}
+					mode="inverse"
 					buttonType="submit"
 					disabled={value <= 0}
 					className="block my-2 w-full"

@@ -48,6 +48,7 @@ function Match() {
 			</section>
 			<Button
 				type={type}
+				mode="normal"
 				buttonType="button"
 				className="block mt-8 width-full"
 				onClick={onCancel}

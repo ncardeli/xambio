@@ -66,6 +66,6 @@ function History() {
 	);
 }
 
-const getHistoryRoute = (id) => `/history/bid?${id}`;
+const getHistoryRoute = (id) => `/history/${id}`;
 
 export default History;

@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { hasActiveBid, isActiveBidMatched } from "../selectors/activeBid";
 import { getExchangeRate } from "../selectors/exchangeRate";
 import History from "./History";
+import HistoryOperation from "./HistoryOperation";
 
 function App() {
 	const exchangeRate = useSelector(getExchangeRate);
@@ -27,6 +28,10 @@ function App() {
 			<Header></Header>
 			<main className="App">
 				<Switch>
+					<Route
+						path="/history/:id"
+						render={({ match }) => <HistoryOperation id={match.params.id} />}
+					></Route>
 					<Route path="/history">
 						<History />
 					</Route>

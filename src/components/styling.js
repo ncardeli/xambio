@@ -7,13 +7,13 @@ const BACKGROUND_COLOR_BY_TYPE = {
 const BACKGROUND_COLOR_INVERSE_BY_TYPE = {
 	sell: "white",
 	buy: "white",
-	main: "gray-900",
+	main: "gray-800",
 };
 
 const TEXT_COLOR_BY_TYPE = {
 	sell: "white",
 	buy: "white",
-	main: "gray-900",
+	main: "gray-800",
 };
 
 const TEXT_COLOR_INVERSE_BY_TYPE = {

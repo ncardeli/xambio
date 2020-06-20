@@ -50,7 +50,7 @@ function Bid({
 						</label>
 						<input
 							id="amount"
-							className="flex-grow bg-transparent border border-transparent text-gray-900 p-4 my-2 outline-none bg-white rounded-r"
+							className="flex-grow bg-transparent border border-transparent text-gray-800 p-4 my-2 outline-none bg-white rounded-r"
 							type="text"
 							inputMode="numeric"
 							placeholder="Ingresa un monto, por ejemplo: 500"

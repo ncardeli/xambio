@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import overflowIcon from "../assets/overflow.svg";
 import closeIcon from "../assets/close.svg";
+import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
 
 const menuOptions = [
@@ -23,7 +24,15 @@ function Header() {
 		<header>
 			<nav className="flex items-center justify-between flex-wrap bg-gray-700 p-4 mb-4">
 				<div className="flex items-center flex-shrink-0 text-white mr-6">
-					<Link to="/" onClick={closeMenu}>
+					<Link to="/" onClick={closeMenu} className="flex flex-row">
+						<img
+							src={logo}
+							className="w-8 mr-4"
+							alt="Xambio logo"
+							style={{
+								filter: "invert(1)",
+							}}
+						></img>
 						<span className="font-semibold text-4xl tracking-tight">
 							Xambio
 						</span>

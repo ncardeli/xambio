@@ -13,9 +13,17 @@
 .grid-form {
 	@apply grid;
 	@apply gap-4;
-	grid-template-columns: auto auto;
+	grid-template-columns: 1fr 1fr;
 }
 
 input:invalid {
 	@apply border-red-600 border-dashed;
+}
+
+.list-row {
+	@apply flex flex-col border-b-2 p-4 pr-8 relative cursor-pointer;
+}
+
+.list-row:last-child {
+	@apply border-b-0;
 }

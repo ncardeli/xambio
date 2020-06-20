@@ -36,7 +36,7 @@ function History() {
 								onClick={onClick(id)}
 							>
 								<div
-									className={`absolute h-full inset-y-0 left-0 border-l-2 ${borderColor}`}
+									className={`absolute h-full inset-y-0 left-0 border-l-4 ${borderColor}`}
 								></div>
 								<h3 className="mb-2">{text}</h3>
 								<div>

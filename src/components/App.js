@@ -26,7 +26,7 @@ function App() {
 	return (
 		<Router>
 			<Header></Header>
-			<main className="App">
+			<main className="App mt-8">
 				<Switch>
 					<Route
 						path="/history/:id"

@@ -6,7 +6,7 @@ import {
 	currencyToFormattedString,
 	dateToFormattedString,
 } from "../util/localization";
-import { Button } from "./Button";
+import { ButtonLink } from "./Button";
 
 function HistoryOperation({ id }) {
 	const {
@@ -25,22 +25,24 @@ function HistoryOperation({ id }) {
 	return (
 		<Panel type="main" title={title}>
 			<section className="grid-form mx-auto mb-8">
-				<div className="text-right">Id de operación:</div>
+				<div className="text-right">Operación:</div>
 				<div>{id}</div>
 				<div className="text-right">Fecha:</div>
 				<div>{dateToFormattedString(new Date(timestamp))}</div>
 				<div className="text-right">Estado:</div>
 				<div>{status === "completed" ? "Completeda" : "Cancelada"}</div>
-				<div className="text-right">
+				<div className="text-right mt-4">
 					{type === "sell" ? "Vendiste" : "Compraste"}:
 				</div>
-				<div>{formattedDollars}</div>
+				<div className="mt-4">{formattedDollars}</div>
 				<div className="text-right">
 					{type === "sell" ? "Recibiste" : "Entregaste"}:
 				</div>
 				<div>{formattedLocal}</div>
-				<div className="text-right">{type === "sell" ? "De" : "A"}:</div>
-				<div>
+				<div className="text-right mt-4">
+					{type === "sell" ? "Le vendiste a" : "Le compraste a"}:
+				</div>
+				<div className="mt-4">
 					{match.name} ({"<"}
 					<a href={`mailto:${match.email}`}>{match.email}</a>
 					{">"})
@@ -54,14 +56,15 @@ function HistoryOperation({ id }) {
 					{match.receivingAccount} ({match.receivingAccountBank})
 				</div>
 			</section>
-			<Button
+			<ButtonLink
 				type="main"
 				mode="inverse"
 				buttonType="button"
+				to="/history"
 				className="block mt-8 width-full"
 			>
 				Volver
-			</Button>
+			</ButtonLink>
 		</Panel>
 	);
 }

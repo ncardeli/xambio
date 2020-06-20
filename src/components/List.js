@@ -8,10 +8,7 @@ function List({ children }) {
 
 function ListRow({ linkTo, children, onClick }) {
 	return (
-		<div
-			className="flex flex-col border-b-2 p-4 pr-8 relative cursor-pointer"
-			onClick={onClick}
-		>
+		<div className="list-row" onClick={onClick}>
 			{children}
 			<Link to={linkTo}>
 				<img

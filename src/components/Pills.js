@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Pills({ value, options, textColorClass, onSelect }) {
+export function Pills({ options = [], textColorClass = "", value, onSelect }) {
 	return (
 		<div className={`grid grid-cols-${options.length} gap-1`}>
 			{options.map((optionValue, i) => {

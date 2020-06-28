@@ -20,7 +20,7 @@ function Sell({ exchangeRate }) {
 	};
 	return (
 		<Bid
-			buttonLabel="Vender"
+			submitButtonLabel="Vender"
 			exchangeRate={exchangeRate}
 			type="sell"
 			title="¿Cuántos dólares queres vender?"

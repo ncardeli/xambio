@@ -7,7 +7,8 @@ import { getClassesByType } from "./styling";
 import { Button, ButtonLink } from "./Button";
 
 function Bid({
-	buttonLabel,
+	submitButtonLabel,
+	cancelButtonLabel = "Cancelar",
 	inputLabel,
 	title,
 	type,
@@ -82,10 +83,10 @@ function Bid({
 					disabled={value <= 0}
 					className="block my-2 w-full"
 				>
-					{buttonLabel}
+					{submitButtonLabel}
 				</Button>
 				<ButtonLink to="/" className="block text-sm my-2 w-full text-center">
-					Cancelar
+					{cancelButtonLabel}
 				</ButtonLink>
 			</form>
 		</Panel>

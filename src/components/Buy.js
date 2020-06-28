@@ -21,7 +21,7 @@ function Buy({ exchangeRate }) {
 
 	return (
 		<Bid
-			buttonLabel="Comprar"
+			submitButtonLabel="Comprar"
 			exchangeRate={exchangeRate}
 			type="buy"
 			title="¿Cuántos dólares queres comprar?"

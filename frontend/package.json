@@ -42,5 +42,15 @@
 		"autoprefixer": "^9.8.0",
 		"postcss-cli": "^7.1.1",
 		"tailwindcss": "^1.4.6"
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ncardeli/xambio.git"
+	},
+	"author": "ncardeli",
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/ncardeli/xambio/issues"
+	},
+	"homepage": "https://github.com/ncardeli/xambio#readme"
 }

@@ -1,0 +1,42 @@
+{
+	"name": "xambio",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"backend": "nodemon backend/server.js",
+		"dev": "concurrently --kill-others-on-fail \"yarn backend\" \"yarn frontend\"",
+		"frontend": "cd frontend && yarn start",
+		"postinstall": "cd frontend && yarn install",
+		"start": "node backend/server.js",
+		"test": "cross-env NODE_ENV=test jest",
+		"test.watch": "yarn test -- --watch"
+	},
+	"dependencies": {
+		"app-root-path": "^2.2.1",
+		"axios": "^0.19.0",
+		"body-parser": "^1.18.3",
+		"express": "^4.16.4",
+		"express-validator": "^6.2.0",
+		"morgan": "^1.9.1",
+		"node-cache": "^4.2.1",
+		"winston": "^3.2.1"
+	},
+	"devDependencies": {
+		"axios-mock-adapter": "^1.17.0",
+		"concurrently": "^4.0.1",
+		"cross-env": "^6.0.2",
+		"jest": "^24.9.0",
+		"nodemon": "^1.19.1",
+		"supertest": "^4.0.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ncardeli/xambio.git"
+	},
+	"author": "ncardeli",
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/ncardeli/xambio/issues"
+	},
+	"homepage": "https://github.com/ncardeli/xambio#readme"
+}

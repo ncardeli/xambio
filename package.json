@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"backend": "nodemon backend/server.js",
-		"dev": "concurrently --kill-others-on-fail \"yarn backend\" \"yarn frontend\"",
+		"dev": "concurrently --kill-others-on-fail \"yarn run backend\" \"yarn run frontend\"",
 		"frontend": "cd frontend && yarn start",
 		"postinstall": "cd frontend && yarn install",
 		"start": "node backend/server.js",

@@ -13,13 +13,14 @@ import Waiting from "./Waiting";
 import Match from "./Match";
 import Header from "./Header";
 import { useSelector } from "react-redux";
+import { useQuery } from "react-query";
 import { hasActiveBid, isActiveBidMatched } from "../selectors/activeBid";
-import { getExchangeRate } from "../selectors/exchangeRate";
 import History from "./History";
 import HistoryOperation from "./HistoryOperation";
+import { REACT_QUERY_KEY } from "../constants/config";
 
 function App() {
-	const exchangeRate = useSelector(getExchangeRate);
+	const { exchangeRate } = useExchangeRate();
 	const isActive = useSelector(hasActiveBid);
 	const isMatched = useSelector(isActiveBidMatched);
 
@@ -64,3 +65,14 @@ function App() {
 }
 
 export default App;
+
+function useExchangeRate() {
+	const { data, isLoading, error } = useQuery(REACT_QUERY_KEY, () =>
+		fetch("/api/exchange-rate")
+			.then((res) => res.json())
+			.then((json) => {
+				return json.rate;
+			})
+	);
+	return { error, exchangeRate: data, isLoading };
+}

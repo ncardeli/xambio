@@ -1,8 +1,11 @@
 const express = require("express");
 const appLogger = require("../logging/logger");
+const exchangeRate = require("./exchangeRate");
 
 const router = express.Router();
 const isProduction = process.env.NODE_ENV === "production";
+
+router.get("/exchange-rate", exchangeRate);
 
 // Custom error handling
 router.use(function (err, req, res, next) {

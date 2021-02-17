@@ -2,32 +2,54 @@
   "name": "xambio",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "backend": "nodemon backend/server.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn run backend\" \"yarn run frontend\"",
-    "frontend": "cd frontend && yarn start",
-    "postinstall": "cd frontend && yarn install",
-    "start": "node backend/server.js",
-    "test": "cross-env NODE_ENV=test jest",
-    "test.watch": "yarn test -- --watch"
-  },
   "dependencies": {
-    "app-root-path": "^2.2.1",
-    "axios": "^0.21.1",
-    "body-parser": "^1.18.3",
-    "express": "^4.16.4",
-    "express-validator": "^6.2.0",
-    "morgan": "^1.9.1",
-    "node-cache": "^4.2.1",
-    "winston": "^3.2.1"
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.1.2",
+    "concurrently": "^5.2.0",
+    "firebase": "^8.2.7",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-query": "^2.25.2",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.1",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6"
   },
   "devDependencies": {
-    "axios-mock-adapter": "^1.17.0",
-    "concurrently": "^5.3.0",
-    "cross-env": "^6.0.2",
-    "jest": "^24.9.0",
-    "nodemon": "^1.19.1",
-    "supertest": "^4.0.2"
+    "autoprefixer": "^9.8.0",
+    "cross-env": "^7.0.3",
+    "postcss-cli": "^7.1.1",
+    "tailwindcss": "^1.4.6"
+  },
+  "scripts": {
+    "start": "concurrently \"yarn run watch:css\" \"react-scripts start\"",
+    "build": "yarn run build:css && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "deploy": "yarn run build && firebase deploy --only hosting",
+    "build:css": "postcss ./src/assets/tailwind.css -o ./src/assets/main.css",
+    "watch:css": "yarn run build:css -- --watch",
+    "ci": "cross-env CI=true && yarn run ci:react && yarn run ci:functions",
+    "ci:react": "yarn test",
+    "ci:functions": "cd functions/ && yarn run build && yarn test",
+    "precommit": "yarn run ci"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "repository": {
     "type": "git",

@@ -2,7 +2,6 @@
 
 # dependencies
 /node_modules
-frontend/node_modules
 /.pnp
 .pnp.js
 
@@ -11,7 +10,6 @@ frontend/node_modules
 
 # production
 /build
-/frontend/build
 
 # misc
 .DS_Store
@@ -25,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 app.log
 
-frontend/src/assets/main.css
+src/assets/main.css

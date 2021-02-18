@@ -5,7 +5,7 @@ const isProduction = process.env.NODE_ENV === "production";
 
 export default https.onRequest(async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
-  res.set("Access-Control-Allow-Headers", "Content-Type");
+  res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
   try {
     const data = await queryCachedExchangeRate();

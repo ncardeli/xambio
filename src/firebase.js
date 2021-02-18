@@ -18,4 +18,7 @@ firebase.initializeApp(config);
 firebase.functions();
 firebase.functions().useEmulator("localhost", 5001);
 
+var auth = firebase.auth();
+auth.useEmulator("http://localhost:9099");
+
 export default firebase;

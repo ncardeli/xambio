@@ -6,9 +6,10 @@ import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 
 import exchangeRate from "./exchangeRate/onRequest.function";
+import activeBid from "./activeBid/onCreate.function";
 
 admin.initializeApp();
 
 //loadFunctions(__dirname, exports, ".function.js");
 
-export { exchangeRate };
+export { activeBid, exchangeRate };

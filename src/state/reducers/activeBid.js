@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   type: "sell",
   dollars: 1000,
   local: 42500,
-  validUntil: Number.POSITIVE_INFINITY,
+  timestamp: Number.POSITIVE_INFINITY,
   match: {
     name: "Juan Perez",
     email: "jperez@aa.aa.com",
@@ -39,12 +39,12 @@ function activeBidReducer(state = INITIAL_STATE, action) {
 }
 
 function applyStartActiveBid(_, action) {
-  const { type, dollars, local, validUntil } = action.payload;
+  const { type, dollars, local, timestamp } = action.payload;
   return {
     type,
     dollars,
     local,
-    validUntil,
+    timestamp,
     match: null,
     error: null,
   };

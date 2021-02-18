@@ -24,3 +24,6 @@ yarn-error.log*
 app.log
 
 src/assets/main.css
+
+# dotenv environment variables file
+.env

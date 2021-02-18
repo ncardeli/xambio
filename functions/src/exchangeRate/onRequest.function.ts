@@ -1,6 +1,7 @@
 import { https } from "firebase-functions";
 import { queryExchangeRate } from "./bcu";
-import Cache from "../util/cache";
+import { Cache } from "../util/cache";
+import FirebaseRtdbCache from "../util/rtdb-cache";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -8,7 +9,7 @@ export default https.onRequest(async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   res.set("Access-Control-Allow-Headers", "Content-Type");
 
-  const cache = new Cache(300);
+  const cache: Cache = new FirebaseRtdbCache(300);
 
   try {
     const data = await cache.get("exchange-rate", async () => {

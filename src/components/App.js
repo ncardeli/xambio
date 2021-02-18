@@ -14,7 +14,7 @@ import Match from "./Match";
 import Header from "./Header";
 import { useSelector } from "react-redux";
 import { useQuery } from "react-query";
-import { hasActiveBid, isActiveBidMatched } from "../selectors/activeBid";
+import { hasActiveBid, isActiveBidMatched } from "../state/selectors/activeBid";
 import History from "./History";
 import HistoryOperation from "./HistoryOperation";
 import { REACT_QUERY_KEY } from "../constants/config";

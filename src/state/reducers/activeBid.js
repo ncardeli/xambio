@@ -5,21 +5,7 @@ import {
   ACTIVE_BID_MATCH,
 } from "../actions/actionTypes";
 
-//const INITIAL_STATE = null;
 const INITIAL_STATE = {
-  type: "sell",
-  dollars: 1000,
-  local: 42500,
-  timestamp: Number.POSITIVE_INFINITY,
-  match: {
-    name: "Juan Perez",
-    email: "jperez@aa.aa.com",
-    phone: "099212474",
-    receivingAccount: "5882543",
-    receivingAccountBank: "Itaú",
-    depositAccount: "8182773",
-    depositAccountBank: "Itaú",
-  },
   error: null,
 };
 

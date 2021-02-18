@@ -7,9 +7,8 @@ export default database
   .onCreate(async (snapshot, context) => {
     const { rate } = await queryCachedExchangeRate();
     const original = snapshot.val();
-    return snapshot.ref.set({
-      ...original,
-      local: original.dollars * rate,
-      timestamp: new Date().getTime(),
-    });
+    await snapshot.ref.child("uid").set(context.auth?.uid);
+    await snapshot.ref.child("local").set(original.dollars * rate);
+    await snapshot.ref.child("timestamp").set(new Date().getTime());
+    return snapshot;
   });

@@ -1,4 +1,4 @@
-import { pushDocument } from "state/api";
+import { fetchDocument, pushDocument } from "state/api";
 import {
   ACTIVE_BID_START_SUCCESS,
   ACTIVE_BID_FETCH_SUCCESS,
@@ -28,8 +28,13 @@ const doStartActiveBid = (payload) => async (dispatch) => {
 
   try {
     const bidRef = await pushDocument("bids", payload);
-    console.log(bidRef);
-    dispatch(doStartActiveBidSuccess());
+    bidRef.on("value", (snapshot) => {
+      const value = snapshot.val();
+      if (value.timestamp) {
+        dispatch(doStartActiveBidSuccess(value));
+        bidRef.off();
+      }
+    });
   } catch (error) {
     dispatch(doStartActiveBidError(error));
   }

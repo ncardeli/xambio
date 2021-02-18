@@ -8,7 +8,7 @@ function hasActiveBid(state) {
   const activeBid = getActiveBid(state);
   const now = new Date().getTime();
   if (activeBid !== null) {
-    return activeBid.timestamp + MAX_ACTIVE_BID_TTL < now;
+    return activeBid.timestamp + MAX_ACTIVE_BID_TTL > now;
   }
   return false;
 }

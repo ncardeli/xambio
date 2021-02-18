@@ -21,7 +21,6 @@ import PrivateRoute from "./PrivateRoute";
 
 import { useDispatch, useSelector } from "react-redux";
 import { hasActiveBid, isActiveBidMatched } from "../state/selectors/activeBid";
-import { getExchangeRate } from "state/selectors/exchangeRate";
 import { doFetchExchangeRate } from "state/actions/exchangeRate";
 import { isAuthenticated } from "state/selectors/auth";
 
@@ -33,7 +32,6 @@ function App() {
   }, [dispatch]);
 
   const isAuth = useSelector(isAuthenticated);
-  const exchangeRate = useSelector(getExchangeRate);
   const isActive = useSelector(hasActiveBid);
   const isMatched = useSelector(isActiveBidMatched);
 
@@ -55,14 +53,8 @@ function App() {
               <Redirect to="/"></Redirect>
             </Route>
           )}
-          <PrivateRoute
-            path="/sell"
-            render={() => <Sell exchangeRate={exchangeRate} />}
-          ></PrivateRoute>
-          <PrivateRoute
-            path="/buy"
-            render={() => <Buy exchangeRate={exchangeRate} />}
-          ></PrivateRoute>
+          <PrivateRoute path="/sell" render={() => <Sell />}></PrivateRoute>
+          <PrivateRoute path="/buy" render={() => <Buy />}></PrivateRoute>
           <Route path="/">
             {isAuth && isActive ? (
               isMatched ? (
@@ -71,7 +63,7 @@ function App() {
                 <Waiting></Waiting>
               )
             ) : (
-              <Home exchangeRate={exchangeRate} />
+              <Home />
             )}
           </Route>
         </Switch>

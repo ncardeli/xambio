@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 const PREFIXED_AMOUNTS = [100, 500, 1000, 2000];
 
-function Sell({ exchangeRate }) {
+function Sell() {
   const dispatch = useDispatch();
 
   const onSubmit = (value) => {
@@ -19,7 +19,6 @@ function Sell({ exchangeRate }) {
   return (
     <Bid
       submitButtonLabel="Vender"
-      exchangeRate={exchangeRate}
       type="sell"
       title="¿Cuántos dólares queres vender?"
       prefixedAmounts={PREFIXED_AMOUNTS}

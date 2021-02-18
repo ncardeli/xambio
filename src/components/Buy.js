@@ -5,7 +5,7 @@ import { doStartActiveBidSuccess } from "../state/actions/activeBid";
 
 const PREFIXED_AMOUNTS = [100, 500, 1000, 2000];
 
-function Buy({ exchangeRate }) {
+function Buy() {
   const dispatch = useDispatch();
 
   const onSubmit = (value) => {
@@ -13,7 +13,6 @@ function Buy({ exchangeRate }) {
       doStartActiveBidSuccess({
         type: "buy",
         dollars: value,
-        local: value * exchangeRate,
       })
     );
   };
@@ -21,7 +20,6 @@ function Buy({ exchangeRate }) {
   return (
     <Bid
       submitButtonLabel="Comprar"
-      exchangeRate={exchangeRate}
       type="buy"
       title="¿Cuántos dólares queres comprar?"
       prefixedAmounts={PREFIXED_AMOUNTS}

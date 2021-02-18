@@ -1,5 +1,8 @@
 function getExchangeRate(state) {
-	return state.exchangeRate.rate;
+  return {
+    exchangeRate: state.exchangeRate.rate,
+    isFetching: state.exchangeRate.isFetching,
+  };
 }
 
 export { getExchangeRate };

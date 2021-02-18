@@ -1,7 +1,7 @@
 import {
-  ACTIVE_BID_START,
+  ACTIVE_BID_START_SUCCESS,
   ACTIVE_BID_FETCH_ERROR,
-  ACTIVE_BID_CANCEL,
+  ACTIVE_BID_CANCEL_SUCCESS,
   ACTIVE_BID_MATCH,
 } from "../actions/actionTypes";
 
@@ -25,9 +25,9 @@ const INITIAL_STATE = {
 
 function activeBidReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case ACTIVE_BID_START:
+    case ACTIVE_BID_START_SUCCESS:
       return applyStartActiveBid(state, action);
-    case ACTIVE_BID_CANCEL:
+    case ACTIVE_BID_CANCEL_SUCCESS:
       return applyCancelActiveBid(state, action);
     case ACTIVE_BID_FETCH_ERROR:
       return applyFetchErrorActiveBid(state, action);

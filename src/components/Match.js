@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getActiveBid } from "../state/selectors/activeBid";
 import Panel from "./Panel";
-import { doCancelActiveBid } from "../state/actions/activeBid";
+import { doCancelActiveBidSuccess } from "../state/actions/activeBid";
 import { Button } from "./Button";
 import { currencyToFormattedString } from "../util/localization";
 
@@ -21,7 +21,7 @@ function Match() {
   const amountToSend = type === "sell" ? formattedDollars : formattedLocal;
 
   const onCancel = () => {
-    dispatch(doCancelActiveBid());
+    dispatch(doCancelActiveBidSuccess());
   };
 
   return (

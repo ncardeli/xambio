@@ -1,26 +1,26 @@
 import {
-  ACTIVE_BID_START,
-  ACTIVE_BID_FETCH,
+  ACTIVE_BID_START_SUCCESS,
+  ACTIVE_BID_FETCH_SUCCESS,
   ACTIVE_BID_FETCH_ERROR,
-  ACTIVE_BID_CANCEL,
+  ACTIVE_BID_CANCEL_SUCCESS,
   ACTIVE_BID_MATCH,
 } from "./actionTypes";
 
-const doStartActiveBid = (payload) => ({
-  type: ACTIVE_BID_START,
+const doStartActiveBidSuccess = (payload) => ({
+  type: ACTIVE_BID_START_SUCCESS,
   payload,
 });
 
-const doCancelActiveBid = (payload) => ({
-  type: ACTIVE_BID_CANCEL,
+const doCancelActiveBidSuccess = (payload) => ({
+  type: ACTIVE_BID_CANCEL_SUCCESS,
   payload,
 });
 
-const doFetchActiveBid = () => ({
-  type: ACTIVE_BID_FETCH,
+const doFetchActiveBidSuccess = () => ({
+  type: ACTIVE_BID_FETCH_SUCCESS,
 });
 
-const doFetchErrorActiveBid = (error) => ({
+const doFetchActiveBidError = (error) => ({
   type: ACTIVE_BID_FETCH_ERROR,
   error,
 });
@@ -31,9 +31,9 @@ const doMatchActiveBid = (match) => ({
 });
 
 export {
-  doStartActiveBid,
-  doCancelActiveBid,
-  doFetchActiveBid,
-  doFetchErrorActiveBid,
+  doStartActiveBidSuccess,
+  doCancelActiveBidSuccess,
+  doFetchActiveBidSuccess,
+  doFetchActiveBidError,
   doMatchActiveBid,
 };

@@ -1,18 +1,22 @@
 import {
-  EXCHANGE_RATE_UPDATE,
+  EXCHANGE_RATE_FETCH_SUCCESS,
   EXCHANGE_RATE_FETCH_ERROR,
+  EXCHANGE_RATE_FETCH_INIT,
 } from "../actions/actionTypes";
 
 const INITIAL_STATE = {
-  rate: 42.5,
+  rate: 0,
   lastUpdated: Number.POSITIVE_INFINITY,
   error: null,
+  isFetching: false,
 };
 
 function exchangeRateReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case EXCHANGE_RATE_UPDATE:
-      return applyUpdateExchangeRate(state, action);
+    case EXCHANGE_RATE_FETCH_INIT:
+      return applyFetchInitExchangeRate(state);
+    case EXCHANGE_RATE_FETCH_SUCCESS:
+      return applyFetchSuccessExchangeRate(state, action);
     case EXCHANGE_RATE_FETCH_ERROR:
       return applyFetchErrorExchangeRate(state, action);
     default:
@@ -20,11 +24,21 @@ function exchangeRateReducer(state = INITIAL_STATE, action) {
   }
 }
 
-function applyUpdateExchangeRate(state, action) {
+function applyFetchInitExchangeRate(state) {
   return {
-    rate: action.rate,
-    lastUpdated: action.lastUpdated,
+    ...state,
+    lastUpdated: null,
     error: null,
+    isFetching: true,
+  };
+}
+
+function applyFetchSuccessExchangeRate(state, action) {
+  return {
+    rate: action.payload.rate,
+    lastUpdated: action.payload.date,
+    error: null,
+    isFetching: false,
   };
 }
 
@@ -32,6 +46,7 @@ function applyFetchErrorExchangeRate(state, action) {
   return {
     ...state,
     error: action.error,
+    isFetching: false,
   };
 }
 

@@ -12,17 +12,21 @@ import Sell from "./Sell";
 import Waiting from "./Waiting";
 import Match from "./Match";
 import Header from "./Header";
-import { useSelector } from "react-redux";
-import { useQuery } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
 import { hasActiveBid, isActiveBidMatched } from "../state/selectors/activeBid";
 import History from "./History";
 import HistoryOperation from "./HistoryOperation";
-import { REACT_QUERY_KEY } from "../constants/config";
-
-import firebase from "firebase.js";
+import { getExchangeRate } from "state/selectors/exchangeRate";
+import { doFetchExchangeRate } from "state/actions/exchangeRate";
 
 function App() {
-  const { exchangeRate } = useExchangeRate();
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(doFetchExchangeRate());
+  }, [dispatch]);
+
+  const exchangeRate = useSelector(getExchangeRate);
   const isActive = useSelector(hasActiveBid);
   const isMatched = useSelector(isActiveBidMatched);
 
@@ -67,16 +71,3 @@ function App() {
 }
 
 export default App;
-
-function useExchangeRate() {
-  const { data, isLoading, error } = useQuery(REACT_QUERY_KEY, async () => {
-    const exchangeRate = firebase.functions().httpsCallable("exchangeRate");
-    try {
-      const result = await exchangeRate();
-      return result.data.rate;
-    } catch (error) {
-      console.error(error);
-    }
-  });
-  return { error, exchangeRate: data, isLoading };
-}

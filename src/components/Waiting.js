@@ -3,7 +3,7 @@ import Panel from "./Panel";
 import { Button } from "./Button";
 import { currencyToFormattedString } from "../util/localization";
 import { useSelector, useDispatch } from "react-redux";
-import { doCancelActiveBid } from "../state/actions/activeBid";
+import { doCancelActiveBidSuccess } from "../state/actions/activeBid";
 
 function Waiting() {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ function Waiting() {
   const amountToSend = type === "sell" ? formattedDollars : formattedLocal;
 
   const onCancel = () => {
-    dispatch(doCancelActiveBid());
+    dispatch(doCancelActiveBidSuccess());
   };
 
   return (

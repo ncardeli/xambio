@@ -1,6 +1,6 @@
 {
   "projects": {
     "default": "xambio-f3e86",
-    "staging": "xambio-f3e86"
+    "staging": "xambio-staging"
   }
 }

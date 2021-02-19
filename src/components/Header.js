@@ -1,28 +1,31 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import overflowIcon from "../assets/overflow.svg";
 import closeIcon from "../assets/close.svg";
 import logo from "../assets/logo.svg";
-import { isAuthenticated } from "state/selectors/auth";
+import { getUserData, isAuthenticated } from "state/selectors/auth";
+import { doAuthSignOut } from "state/actions/auth";
 
 const menuOptions = [
   {
     text: "Historial",
     url: "/history",
   },
-  {
-    text: "Cerrar sesión",
-    url: "/",
-  },
 ];
 
 function Header() {
+  const dispatch = useDispatch();
   const [isMenuOpened, setMenuOpened] = useState(false);
   const toggleMenu = () => setMenuOpened(!isMenuOpened);
   const closeMenu = () => setMenuOpened(false);
   const isAuth = useSelector(isAuthenticated);
+  const userData = useSelector(getUserData);
+
+  const signOut = () => {
+    dispatch(doAuthSignOut());
+  };
 
   return (
     <header>
@@ -44,9 +47,10 @@ function Header() {
         </div>
         {isAuth && (
           <>
-            <div>
+            <div className="flex flex-row items-center">
+              <span className="text-white pr-3">Hola {userData.name}!</span>
               <button
-                className="flex items-center px-3 py-2 hover:text-white"
+                className="flex-inline items-center px-3 py-2 hover:text-white"
                 onClick={toggleMenu}
               >
                 <img
@@ -77,6 +81,13 @@ function Header() {
                     {text}
                   </Link>
                 ))}
+                <Link
+                  to="/"
+                  className="block mt-4 ml-auto text-gray-300 hover:text-white mr-4 text-right"
+                  onClick={signOut}
+                >
+                  Cerrar sesión
+                </Link>
               </div>
             </div>
           </>

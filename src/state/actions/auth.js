@@ -1,3 +1,4 @@
+import firebase from "firebase.js";
 import { createDocument, fetchDocument } from "state/api";
 import {
   AUTH_PROVIDER_INIT,
@@ -20,42 +21,49 @@ const doAuthProviderError = (payload) => ({
 
 const doAuthCleanUp = () => ({ type: AUTH_CLEAN_UP });
 
-const doAuthWithSocialMedia = (authResult) => {
-  return async (dispatch) => {
-    dispatch(doAuthProviderInit());
-    const { user, additionalUserInfo } = authResult;
-    const { isNewUser, profile } = additionalUserInfo;
-    const { uid, photoURL, email, displayName } = user;
+const doAuthSignOut = () => async (dispatch) => {
+  try {
+    await firebase.auth().signOut();
+    dispatch(doAuthCleanUp());
+  } catch (error) {
+    dispatch(doAuthProviderError({ error }));
+  }
+};
 
-    const { location } = profile;
+const doAuthWithSocialMedia = (authResult) => async (dispatch) => {
+  dispatch(doAuthProviderInit());
+  const { user, additionalUserInfo } = authResult;
+  const { isNewUser, profile } = additionalUserInfo;
+  const { uid, photoURL, email, displayName } = user;
 
-    const userData = {
-      email,
-      name: displayName,
-      createdAt: new Date().getTime(),
-      logoUrl: photoURL,
-      location: location?.name || null,
-    };
+  const { location } = profile;
 
-    let userFromDb = {};
-    if (isNewUser) {
-      try {
-        await createDocument("users", uid, userData);
-      } catch (error) {
-        return dispatch(doAuthProviderError({ error }));
-      }
-    } else {
-      try {
-        userFromDb = await fetchDocument("users", uid);
-      } catch (error) {
-        return dispatch(doAuthProviderError({ error }));
-      }
-    }
-
-    return dispatch(
-      doAuthProviderSuccess({ id: uid, ...userData, ...userFromDb })
-    );
+  const userData = {
+    email,
+    name: displayName,
+    createdAt: new Date().getTime(),
+    logoUrl: photoURL,
+    location: location?.name || null,
   };
+
+  let userFromDb = {};
+  if (isNewUser) {
+    try {
+      await createDocument("users", uid, userData);
+    } catch (error) {
+      return dispatch(doAuthProviderError({ error }));
+    }
+  } else {
+    try {
+      userFromDb = await fetchDocument("users", uid);
+    } catch (error) {
+      return dispatch(doAuthProviderError({ error }));
+    }
+  }
+
+  return dispatch(
+    doAuthProviderSuccess({ id: uid, ...userData, ...userFromDb })
+  );
 };
 
 export {
@@ -64,4 +72,5 @@ export {
   doAuthProviderSuccess,
   doAuthProviderError,
   doAuthCleanUp,
+  doAuthSignOut,
 };

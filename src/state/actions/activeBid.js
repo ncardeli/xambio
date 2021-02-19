@@ -1,4 +1,4 @@
-import { fetchDocument, pushDocument } from "state/api";
+import { pushDocument } from "state/api";
 import {
   ACTIVE_BID_START_SUCCESS,
   ACTIVE_BID_FETCH_SUCCESS,

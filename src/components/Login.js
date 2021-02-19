@@ -45,7 +45,7 @@ function uiConfig(onSignInSuccessHandler, onSignInFailHandler) {
     signInOptions: [
       {
         provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        fullLabel: "Continue with Google",
+        fullLabel: "Iniciar sesión con Google",
         scopes: ["https://www.googleapis.com/auth/userinfo.email"],
       },
     ],

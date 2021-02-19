@@ -2,4 +2,8 @@ function isAuthenticated(state) {
   return state.auth.userData.id !== null;
 }
 
-export { isAuthenticated };
+function getUserData(state) {
+  return state.auth.userData;
+}
+
+export { getUserData, isAuthenticated };

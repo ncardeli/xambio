@@ -3,6 +3,7 @@ import {
   ACTIVE_BID_FETCH_ERROR,
   ACTIVE_BID_CANCEL_SUCCESS,
   ACTIVE_BID_MATCH,
+  ACTIVE_BID_CANCEL_ERROR,
 } from "../actions/actionTypes";
 
 const INITIAL_STATE = {
@@ -15,6 +16,8 @@ function activeBidReducer(state = INITIAL_STATE, action) {
       return applyStartActiveBid(state, action);
     case ACTIVE_BID_CANCEL_SUCCESS:
       return applyCancelActiveBid(state, action);
+    case ACTIVE_BID_CANCEL_ERROR:
+      return applyCancelActiveBidError(state, action);
     case ACTIVE_BID_FETCH_ERROR:
       return applyFetchErrorActiveBid(state, action);
     case ACTIVE_BID_MATCH:
@@ -45,6 +48,13 @@ function applyFetchErrorActiveBid(state, action) {
 
 function applyCancelActiveBid() {
   return null;
+}
+
+function applyCancelActiveBidError(state, action) {
+  return {
+    ...state,
+    error: action.error,
+  };
 }
 
 function applyMatchActiveBid(state, action) {

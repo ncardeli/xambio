@@ -3,20 +3,23 @@ import Panel from "./Panel";
 import { Button } from "./Button";
 import { currencyToFormattedString } from "../util/localization";
 import { useSelector, useDispatch } from "react-redux";
-import { doCancelActiveBidSuccess } from "../state/actions/activeBid";
+import { doCancelActiveBid } from "../state/actions/activeBid";
+import { getActiveBid } from "state/selectors/activeBid";
+import { getUserData } from "state/selectors/auth";
 
 function Waiting() {
   const dispatch = useDispatch();
 
-  const { type, dollars, local } = useSelector((state) => state.activeBid);
+  const { type, dollars, local } = useSelector(getActiveBid);
   const formattedDollars = currencyToFormattedString("USD", dollars);
   const formattedLocal = currencyToFormattedString("UYU", local);
   const { title, subTitle } = getMessages(type);
   const amountToReceive = type === "sell" ? formattedLocal : formattedDollars;
   const amountToSend = type === "sell" ? formattedDollars : formattedLocal;
+  const userData = useSelector(getUserData);
 
   const onCancel = () => {
-    dispatch(doCancelActiveBidSuccess());
+    dispatch(doCancelActiveBid({ uid: userData.id }));
   };
 
   return (

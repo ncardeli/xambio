@@ -1,9 +1,11 @@
-import { pushDocument } from "state/api";
+import { pushDocument, updateDocument } from "state/api";
 import {
   ACTIVE_BID_START_SUCCESS,
   ACTIVE_BID_FETCH_SUCCESS,
   ACTIVE_BID_FETCH_ERROR,
   ACTIVE_BID_CANCEL_SUCCESS,
+  ACTIVE_BID_CANCEL_ERROR,
+  ACTIVE_BID_CANCEL_INIT,
   ACTIVE_BID_MATCH,
   ACTIVE_BID_START_INIT,
   ACTIVE_BID_START_ERROR,
@@ -40,10 +42,31 @@ const doStartActiveBid = (payload) => async (dispatch) => {
   }
 };
 
-const doCancelActiveBidSuccess = (payload) => ({
+const doCancelActiveBidInit = () => ({
+  type: ACTIVE_BID_CANCEL_INIT,
+});
+
+const doCancelActiveBidSuccess = () => ({
   type: ACTIVE_BID_CANCEL_SUCCESS,
+});
+
+const doCancelActiveBidError = (payload) => ({
+  type: ACTIVE_BID_CANCEL_ERROR,
   payload,
 });
+
+const doCancelActiveBid = (payload) => async (dispatch) => {
+  dispatch(doCancelActiveBidInit());
+
+  try {
+    await updateDocument("users", payload.uid, {
+      lastBid: null,
+    });
+    dispatch(doCancelActiveBidSuccess());
+  } catch (error) {
+    dispatch(doCancelActiveBidError(error));
+  }
+};
 
 const doFetchActiveBidSuccess = () => ({
   type: ACTIVE_BID_FETCH_SUCCESS,
@@ -64,7 +87,10 @@ export {
   doStartActiveBidInit,
   doStartActiveBidSuccess,
   doStartActiveBidError,
+  doCancelActiveBid,
+  doCancelActiveBidInit,
   doCancelActiveBidSuccess,
+  doCancelActiveBidError,
   doFetchActiveBidSuccess,
   doFetchActiveBidError,
   doMatchActiveBid,

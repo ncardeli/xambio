@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Panel from "./Panel";
 import { List, ListRow } from "./List";
 import check from "../assets/check.svg";
@@ -11,16 +11,32 @@ import {
   currencyToFormattedString,
 } from "../util/localization";
 import { getClassesByType } from "./styling";
+import { doFetchHistory } from "state/actions/history";
+import { getUserData } from "state/selectors/auth";
+import { isBidTimestampActive } from "state/selectors/activeBid";
 
 function History() {
+  const { id: uid } = useSelector(getUserData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(doFetchHistory({ uid }));
+  }, [dispatch, uid]);
+
   const history = useSelector(getHistory);
   const browserHistory = useHistory();
   const onClick = (id) => () => browserHistory.push(getHistoryRoute(id));
+
   return (
     <Panel type="main" title="Historial de operaciones" className="w-full">
       {history.length > 0 && (
         <List>
           {history.map(({ id, dollars, match, status, timestamp, type }) => {
+            const {
+              icon: statusIcon,
+              alt: statusAlt,
+              text: statusText,
+            } = resolveStatus(status, timestamp);
             const operationTypeText = type === "sell" ? "Venta" : "Compra";
             const counterPartText =
               status === "completed" ? ` a ${match.name}` : "";
@@ -42,15 +58,15 @@ function History() {
                 <div>
                   <img
                     className="inline pr-2"
-                    src={status === "completed" ? check : cross}
-                    alt={status === "completed" ? "Check" : "Cruz"}
+                    src={statusIcon}
+                    alt={statusAlt}
                     style={{
                       filter: "invert(.4)",
                     }}
                   ></img>
-                  {`${
-                    status === "completed" ? "Completeda" : "Cancelada"
-                  } - ${dateToFormattedString(new Date(timestamp))}`}
+                  {`${statusText} - ${dateToFormattedString(
+                    new Date(timestamp)
+                  )}`}
                 </div>
               </ListRow>
             );
@@ -67,5 +83,47 @@ function History() {
 }
 
 const getHistoryRoute = (id) => `/history/${id}`;
+
+const bidStatusMap = {
+  completed: {
+    icon: check,
+    alt: "Check",
+    text: "Completada",
+  },
+  aborted: {
+    icon: cross,
+    alt: "Cruz",
+    text: "Cancelada",
+  },
+  active: {
+    icon: check,
+    alt: "Check",
+    text: "Activa",
+  },
+  unknown: {
+    icon: cross,
+    alt: "Cruz",
+    text: "Desconocido",
+  },
+  expired: {
+    icon: cross,
+    alt: "Cruz",
+    text: "Expirada",
+  },
+};
+
+function resolveStatus(status, timestamp) {
+  if (bidStatusMap[status]) {
+    return bidStatusMap[status];
+  }
+
+  if (!status) {
+    return isBidTimestampActive(timestamp)
+      ? bidStatusMap.active
+      : bidStatusMap.expired;
+  }
+
+  return bidStatusMap.unknown;
+}
 
 export default History;

@@ -6,11 +6,7 @@ function getActiveBid(state) {
 
 function hasActiveBid(state) {
   const activeBid = getActiveBid(state);
-  const now = new Date().getTime();
-  if (activeBid !== null) {
-    return activeBid.timestamp + MAX_ACTIVE_BID_TTL > now;
-  }
-  return false;
+  return activeBid !== null && isBidTimestampActive(activeBid.timestamp);
 }
 
 function isActiveBidMatched(state) {
@@ -18,4 +14,9 @@ function isActiveBidMatched(state) {
   return activeBid !== null && activeBid.match !== null;
 }
 
-export { getActiveBid, hasActiveBid, isActiveBidMatched };
+function isBidTimestampActive(timestamp) {
+  const now = new Date().getTime();
+  return timestamp + MAX_ACTIVE_BID_TTL > now;
+}
+
+export { getActiveBid, hasActiveBid, isActiveBidMatched, isBidTimestampActive };

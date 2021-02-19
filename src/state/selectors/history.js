@@ -1,9 +1,9 @@
 function getHistory(state) {
-	return state.history;
+  return state.history.data;
 }
 
 function getHistoryOperation(state, id) {
-	return state.history.find((operation) => operation.id === id);
+  return getHistory(state).find((operation) => operation.id === id);
 }
 
 export { getHistory, getHistoryOperation };

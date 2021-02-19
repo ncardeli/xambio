@@ -42,7 +42,7 @@ function applyStartActiveBid(_, action) {
 function applyFetchErrorActiveBid(state, action) {
   return {
     ...state,
-    error: action.error,
+    error: action.payload.error,
   };
 }
 
@@ -53,14 +53,14 @@ function applyCancelActiveBid() {
 function applyCancelActiveBidError(state, action) {
   return {
     ...state,
-    error: action.error,
+    error: action.payload.error,
   };
 }
 
 function applyMatchActiveBid(state, action) {
   return {
     ...state,
-    match: action.match,
+    match: action.payload.match,
   };
 }
 

@@ -30,36 +30,37 @@ function HistoryOperation({ id }) {
         <div className="text-right">Fecha:</div>
         <div>{dateToFormattedString(new Date(timestamp))}</div>
         <div className="text-right">Estado:</div>
-        <div>{status === "completed" ? "Completeda" : "Cancelada"}</div>
+        <div>O{status === "completed" ? "Completeda" : "Cancelada"}</div>
         <div className="text-right mt-4">
-          {type === "sell" ? "Vendiste" : "Compraste"}:
+          Ofreciste {type === "sell" ? "vender" : "comprar"}:
         </div>
         <div className="mt-4">{formattedDollars}</div>
-        <div className="text-right">
-          {type === "sell" ? "Recibiste" : "Entregaste"}:
-        </div>
+        <div className="text-right">A cambio de:</div>
         <div>{formattedLocal}</div>
-        <div className="text-right mt-4">
-          {type === "sell" ? "Le vendiste a" : "Le compraste a"}:
-        </div>
-        <div className="mt-4">
-          {match.name} ({"<"}
-          <a href={`mailto:${match.email}`}>{match.email}</a>
-          {">"})
-        </div>
-        <div className="text-right">Despositaste en la cuenta:</div>
-        <div>
-          {match.depositAccount} ({match.depositAccountBank})
-        </div>
-        <div className="text-right">Recibiste en la cuenta:</div>
-        <div>
-          {match.receivingAccount} ({match.receivingAccountBank})
-        </div>
+        {match && (
+          <>
+            <div className="text-right mt-4">
+              {type === "sell" ? "Le vendiste a" : "Le compraste a"}:
+            </div>
+            <div className="mt-4">
+              {match.name} ({"<"}
+              <a href={`mailto:${match.email}`}>{match.email}</a>
+              {">"})
+            </div>
+            <div className="text-right">Despositaste en la cuenta:</div>
+            <div>
+              {match.depositAccount} ({match.depositAccountBank})
+            </div>
+            <div className="text-right">Recibiste en la cuenta:</div>
+            <div>
+              {match.receivingAccount} ({match.receivingAccountBank})
+            </div>
+          </>
+        )}
       </section>
       <ButtonLink
         type="main"
         mode="inverse"
-        buttonType="button"
         to="/history"
         className="block mt-8 width-full"
       >

@@ -5,6 +5,7 @@ import Panel from "./Panel";
 import { doCancelActiveBidSuccess } from "../state/actions/activeBid";
 import { Button } from "./Button";
 import { currencyToFormattedString } from "../util/localization";
+import { DOLLARS_CURRENCY, LOCAL_CURRENCY } from "../constants";
 
 function Match() {
   const dispatch = useDispatch();
@@ -15,8 +16,8 @@ function Match() {
   }`;
   const { match } = activeBid;
 
-  const formattedDollars = currencyToFormattedString("USD", dollars);
-  const formattedLocal = currencyToFormattedString("UYU", local);
+  const formattedDollars = currencyToFormattedString(DOLLARS_CURRENCY, dollars);
+  const formattedLocal = currencyToFormattedString(LOCAL_CURRENCY, local);
   const amountToReceive = type === "sell" ? formattedLocal : formattedDollars;
   const amountToSend = type === "sell" ? formattedDollars : formattedLocal;
 

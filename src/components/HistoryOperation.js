@@ -8,6 +8,7 @@ import {
 } from "../util/localization";
 import { ButtonLink } from "./Button";
 import { resolveBidStatus } from "./util/bid";
+import { LOCAL_CURRENCY, DOLLARS_CURRENCY } from "../constants";
 
 function HistoryOperation({ id }) {
   const {
@@ -20,8 +21,8 @@ function HistoryOperation({ id }) {
   } = useSelector((state) => getHistoryOperation(state, id));
   const { text: statusText } = resolveBidStatus(status, timestamp);
 
-  const formattedDollars = currencyToFormattedString("USD", dollars);
-  const formattedLocal = currencyToFormattedString("UYU", local);
+  const formattedDollars = currencyToFormattedString(DOLLARS_CURRENCY, dollars);
+  const formattedLocal = currencyToFormattedString(LOCAL_CURRENCY, local);
   const operationTypeText = type === "sell" ? "Venta" : "Compra";
   const title = `${operationTypeText} de ${formattedDollars}`;
 

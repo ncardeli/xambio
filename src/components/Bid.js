@@ -8,6 +8,7 @@ import { Button, ButtonLink } from "./Button";
 import { useSelector } from "react-redux";
 import { getExchangeRate } from "state/selectors/exchangeRate";
 import Spinner from "./Spinner";
+import { LOCAL_CURRENCY } from "../constants";
 
 function Bid({
   submitButtonLabel,
@@ -21,7 +22,6 @@ function Bid({
 }) {
   const [value, setValue] = useState(prefixedAmounts[0]);
   const { exchangeRate, isFetching } = useSelector(getExchangeRate);
-
   const onSelect = (stringValue) => {
     setValue(Number(stringValue));
   };
@@ -79,7 +79,7 @@ function Bid({
             {isFetching ? (
               <Spinner></Spinner>
             ) : (
-              currencyToFormattedString("UYU", value * exchangeRate)
+              currencyToFormattedString(LOCAL_CURRENCY, value * exchangeRate)
             )}
           </div>
         </div>

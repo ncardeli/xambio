@@ -6,13 +6,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { doCancelActiveBid } from "../state/actions/activeBid";
 import { getActiveBid } from "state/selectors/activeBid";
 import { getUserData } from "state/selectors/auth";
+import { DOLLARS_CURRENCY, LOCAL_CURRENCY } from "../constants";
 
 function Waiting() {
   const dispatch = useDispatch();
 
   const { type, dollars, local } = useSelector(getActiveBid);
-  const formattedDollars = currencyToFormattedString("USD", dollars);
-  const formattedLocal = currencyToFormattedString("UYU", local);
+  const formattedDollars = currencyToFormattedString(DOLLARS_CURRENCY, dollars);
+  const formattedLocal = currencyToFormattedString(LOCAL_CURRENCY, local);
   const { title, subTitle } = getMessages(type);
   const amountToReceive = type === "sell" ? formattedLocal : formattedDollars;
   const amountToSend = type === "sell" ? formattedDollars : formattedLocal;

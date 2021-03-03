@@ -26,7 +26,7 @@ function Match() {
 
   return (
     <Panel type={type} title={panelTitle}>
-      <section className="grid-form mx-auto mb-8">
+      <div className="grid-form mx-auto mb-8">
         <div className="text-right">Nombre:</div>
         <div>{match.name}</div>
         <div className="text-right">Email:</div>
@@ -45,7 +45,7 @@ function Match() {
         <div>
           {match.receivingAccount} ({match.receivingAccountBank})
         </div>
-      </section>
+      </div>
       <Button
         type={type}
         mode="normal"

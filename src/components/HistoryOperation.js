@@ -7,6 +7,7 @@ import {
   dateToFormattedString,
 } from "../util/localization";
 import { ButtonLink } from "./Button";
+import { resolveBidStatus } from "./util/bid";
 
 function HistoryOperation({ id }) {
   const {
@@ -17,20 +18,22 @@ function HistoryOperation({ id }) {
     timestamp,
     type,
   } = useSelector((state) => getHistoryOperation(state, id));
+  const { text: statusText } = resolveBidStatus(status, timestamp);
 
   const formattedDollars = currencyToFormattedString("USD", dollars);
   const formattedLocal = currencyToFormattedString("UYU", local);
   const operationTypeText = type === "sell" ? "Venta" : "Compra";
   const title = `${operationTypeText} de ${formattedDollars}`;
+
   return (
     <Panel type="main" title={title}>
-      <section className="grid-form mx-auto mb-8">
+      <div className="grid-form mx-auto mb-8">
         <div className="text-right">Operación:</div>
         <div>{id}</div>
         <div className="text-right">Fecha:</div>
         <div>{dateToFormattedString(new Date(timestamp))}</div>
         <div className="text-right">Estado:</div>
-        <div>O{status === "completed" ? "Completeda" : "Cancelada"}</div>
+        <div>{statusText}</div>
         <div className="text-right mt-4">
           Ofreciste {type === "sell" ? "vender" : "comprar"}:
         </div>
@@ -57,7 +60,7 @@ function HistoryOperation({ id }) {
             </div>
           </>
         )}
-      </section>
+      </div>
       <ButtonLink
         type="main"
         mode="inverse"

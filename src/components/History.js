@@ -3,8 +3,6 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Panel from "./Panel";
 import { List, ListRow } from "./List";
-import check from "../assets/check.svg";
-import cross from "../assets/close.svg";
 import { getHistory } from "../state/selectors/history";
 import {
   dateToFormattedString,
@@ -13,7 +11,7 @@ import {
 import { getClassesByType } from "./styling";
 import { doFetchHistory } from "state/actions/history";
 import { getUserData } from "state/selectors/auth";
-import { isBidTimestampActive } from "state/selectors/activeBid";
+import { resolveBidStatus } from "./util/bid";
 
 function History() {
   const { id: uid } = useSelector(getUserData);
@@ -36,7 +34,7 @@ function History() {
               icon: statusIcon,
               alt: statusAlt,
               text: statusText,
-            } = resolveStatus(status, timestamp);
+            } = resolveBidStatus(status, timestamp);
             const operationTypeText = type === "sell" ? "Venta" : "Compra";
             const counterPartText =
               status === "completed" ? ` a ${match.name}` : "";
@@ -83,47 +81,5 @@ function History() {
 }
 
 const getHistoryRoute = (id) => `/history/${id}`;
-
-const bidStatusMap = {
-  completed: {
-    icon: check,
-    alt: "Check",
-    text: "Completada",
-  },
-  aborted: {
-    icon: cross,
-    alt: "Cruz",
-    text: "Cancelada",
-  },
-  active: {
-    icon: check,
-    alt: "Check",
-    text: "Activa",
-  },
-  unknown: {
-    icon: cross,
-    alt: "Cruz",
-    text: "Desconocido",
-  },
-  expired: {
-    icon: cross,
-    alt: "Cruz",
-    text: "Expirada",
-  },
-};
-
-function resolveStatus(status, timestamp) {
-  if (bidStatusMap[status]) {
-    return bidStatusMap[status];
-  }
-
-  if (!status) {
-    return isBidTimestampActive(timestamp)
-      ? bidStatusMap.active
-      : bidStatusMap.expired;
-  }
-
-  return bidStatusMap.unknown;
-}
 
 export default History;

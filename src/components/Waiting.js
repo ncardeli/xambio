@@ -24,7 +24,7 @@ function Waiting() {
 
   return (
     <Panel title={title} type={type}>
-      <section className="flex flex-col text-xl">
+      <div className="flex flex-col text-xl">
         <h3 className="mb-2 mx-auto">{subTitle}</h3>
         <Amount text="Recibirás:" amount={amountToReceive}></Amount>
         <Amount text="Entregarás:" amount={amountToSend}></Amount>
@@ -36,7 +36,7 @@ function Waiting() {
         >
           Retirar oferta
         </Button>
-      </section>
+      </div>
     </Panel>
   );
 }

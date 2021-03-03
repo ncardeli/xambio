@@ -9,25 +9,27 @@ import Bid from "../Bid";
 const bidType = "buy";
 const submitButtonLabel = "Submit button text";
 const cancelButtonLabel = "Cancel button text";
-const exchangeRate = 40;
 const titleText = "Title text";
-const prefixedAmounts = [];
+const prefixedAmounts = [111, 222, 333, 444];
 const inputLabel = "Input label";
 const convertedAmountText = "Converted amount text";
 const intialRoute = `/${bidType}`;
+
+const exchangeRateValue = 10;
+const initialState = {
+  exchangeRate: {
+    rate: exchangeRateValue,
+    lastUpdated: Number.POSITIVE_INFINITY,
+    error: null,
+    isFetching: false,
+  },
+};
 
 const mockStore = configureStore();
 
 function renderWithRouterAndRedux(child, initialRoute = "/") {
   const history = createMemoryHistory(initialRoute);
-  const store = mockStore({
-    exchangeRate: {
-      rate: 10,
-      lastUpdated: Number.POSITIVE_INFINITY,
-      error: null,
-      isFetching: false,
-    },
-  });
+  const store = mockStore(initialState);
   return {
     ...render(
       <Provider store={store}>
@@ -44,7 +46,6 @@ describe("Pills component", () => {
       <Bid
         submitButtonLabel={submitButtonLabel}
         cancelButtonLabel={cancelButtonLabel}
-        exchangeRate={exchangeRate}
         type={bidType}
         title={titleText}
         prefixedAmounts={prefixedAmounts}
@@ -64,7 +65,6 @@ describe("Pills component", () => {
       <Bid
         submitButtonLabel={submitButtonLabel}
         cancelButtonLabel={cancelButtonLabel}
-        exchangeRate={exchangeRate}
         type={bidType}
         title={titleText}
         prefixedAmounts={prefixedAmounts}
@@ -77,12 +77,38 @@ describe("Pills component", () => {
     expect(mockFn).toHaveBeenCalled();
   });
 
+  it("renders the amount to be exchanged", () => {
+    const { getByText, getByDisplayValue } = renderWithRouterAndRedux(
+      <Bid
+        submitButtonLabel={submitButtonLabel}
+        cancelButtonLabel={cancelButtonLabel}
+        type={bidType}
+        title={titleText}
+        prefixedAmounts={prefixedAmounts}
+        inputLabel={inputLabel}
+        convertedAmountText={convertedAmountText}
+      ></Bid>
+    );
+
+    // Amount to exchange with default prefixed amount
+    expect(
+      getByText(new RegExp(prefixedAmounts[0] * exchangeRateValue))
+    ).toBeInTheDocument();
+
+    // Change to the third prefixed amount
+    fireEvent.click(getByDisplayValue(prefixedAmounts[3].toString()));
+
+    // Amount to exchange with third prefixed amount
+    expect(
+      getByText(new RegExp(prefixedAmounts[3] * exchangeRateValue))
+    ).toBeInTheDocument();
+  });
+
   it("redirects to home", () => {
     const { getByText, history } = renderWithRouterAndRedux(
       <Bid
         submitButtonLabel={submitButtonLabel}
         cancelButtonLabel={cancelButtonLabel}
-        exchangeRate={exchangeRate}
         type={bidType}
         title={titleText}
         prefixedAmounts={prefixedAmounts}

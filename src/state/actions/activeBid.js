@@ -1,15 +1,44 @@
-import { pushDocument, updateDocument } from "state/api";
+import { fetchDocument, pushDocument, updateDocument } from "state/api";
 import {
-  ACTIVE_BID_START_SUCCESS,
+  ACTIVE_BID_FETCH_INIT,
   ACTIVE_BID_FETCH_SUCCESS,
   ACTIVE_BID_FETCH_ERROR,
+  ACTIVE_BID_START_INIT,
+  ACTIVE_BID_START_SUCCESS,
+  ACTIVE_BID_START_ERROR,
+  ACTIVE_BID_CANCEL_INIT,
   ACTIVE_BID_CANCEL_SUCCESS,
   ACTIVE_BID_CANCEL_ERROR,
-  ACTIVE_BID_CANCEL_INIT,
   ACTIVE_BID_MATCH,
-  ACTIVE_BID_START_INIT,
-  ACTIVE_BID_START_ERROR,
 } from "./actionTypes";
+
+const doFetchActiveBidInit = () => ({
+  type: ACTIVE_BID_FETCH_INIT,
+});
+
+const doFetchActiveBidSuccess = (payload) => ({
+  type: ACTIVE_BID_FETCH_SUCCESS,
+  payload,
+});
+
+const doFetchActiveBidError = (payload) => ({
+  type: ACTIVE_BID_FETCH_ERROR,
+  payload,
+});
+
+const doFetchActiveBid = (payload) => async (dispatch) => {
+  dispatch(doFetchActiveBidInit());
+
+  try {
+    const user = await fetchDocument("users", payload.uid);
+    if (user.lastBid) {
+      const bid = await fetchDocument("bids", user.lastBid);
+      dispatch(doFetchActiveBidSuccess(bid));
+    }
+  } catch (error) {
+    dispatch(doFetchActiveBidError(error));
+  }
+};
 
 const doStartActiveBidInit = () => ({
   type: ACTIVE_BID_START_INIT,
@@ -68,15 +97,6 @@ const doCancelActiveBid = (payload) => async (dispatch) => {
   }
 };
 
-const doFetchActiveBidSuccess = () => ({
-  type: ACTIVE_BID_FETCH_SUCCESS,
-});
-
-const doFetchActiveBidError = (error) => ({
-  type: ACTIVE_BID_FETCH_ERROR,
-  error,
-});
-
 const doMatchActiveBid = (match) => ({
   type: ACTIVE_BID_MATCH,
   match,
@@ -91,7 +111,9 @@ export {
   doCancelActiveBidInit,
   doCancelActiveBidSuccess,
   doCancelActiveBidError,
+  doMatchActiveBid,
+  doFetchActiveBid,
+  doFetchActiveBidInit,
   doFetchActiveBidSuccess,
   doFetchActiveBidError,
-  doMatchActiveBid,
 };

@@ -22,7 +22,8 @@ import PrivateRoute from "./PrivateRoute";
 import { useDispatch, useSelector } from "react-redux";
 import { hasActiveBid, isActiveBidMatched } from "../state/selectors/activeBid";
 import { doFetchExchangeRate } from "state/actions/exchangeRate";
-import { isAuthenticated } from "state/selectors/auth";
+import { getUserData, isAuthenticated } from "state/selectors/auth";
+import { doFetchActiveBid } from "state/actions/activeBid";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +33,14 @@ function App() {
   }, [dispatch]);
 
   const isAuth = useSelector(isAuthenticated);
+  const { id: uid } = useSelector(getUserData);
+
+  React.useEffect(() => {
+    if (isAuth) {
+      dispatch(doFetchActiveBid({ uid }));
+    }
+  }, [dispatch, isAuth, uid]);
+
   const isActive = useSelector(hasActiveBid);
   const isMatched = useSelector(isActiveBidMatched);
 

@@ -60,7 +60,7 @@ function applyAuthProviderSuccess(state, { payload }) {
 }
 
 function applyAuthCleanUp() {
-  return INITIAL_STATE;
+  return { ...INITIAL_STATE };
 }
 
 export default authReducer;

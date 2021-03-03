@@ -14,17 +14,17 @@ const INITIAL_STATE = {
 function exchangeRateReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case EXCHANGE_RATE_FETCH_INIT:
-      return applyFetchInitExchangeRate(state);
+      return applyFetchExchangeRateInit(state);
     case EXCHANGE_RATE_FETCH_SUCCESS:
-      return applyFetchSuccessExchangeRate(state, action);
+      return applyFetchExchangeRateSuccess(state, action);
     case EXCHANGE_RATE_FETCH_ERROR:
-      return applyFetchErrorExchangeRate(state, action);
+      return applyFetchExchangeRateError(state, action);
     default:
       return state;
   }
 }
 
-function applyFetchInitExchangeRate(state) {
+function applyFetchExchangeRateInit(state) {
   return {
     ...state,
     lastUpdated: null,
@@ -33,7 +33,7 @@ function applyFetchInitExchangeRate(state) {
   };
 }
 
-function applyFetchSuccessExchangeRate(state, action) {
+function applyFetchExchangeRateSuccess(state, action) {
   return {
     ...state,
     rate: action.payload.rate,
@@ -43,7 +43,7 @@ function applyFetchSuccessExchangeRate(state, action) {
   };
 }
 
-function applyFetchErrorExchangeRate(state, action) {
+function applyFetchExchangeRateError(state, action) {
   return {
     ...state,
     error: action.error,

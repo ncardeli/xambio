@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useSelector, shallowEqual } from "react-redux";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { isAuthenticated } from "state/selectors/auth";
 
 const PrivateRoute = ({ path, component: Component, render }) => {
-  const isAuth = useSelector(isAuthenticated, shallowEqual);
+  const isAuth = useSelector(isAuthenticated);
 
   return (
     <Route

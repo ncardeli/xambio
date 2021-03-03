@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import overflowIcon from "../assets/overflow.svg";
@@ -22,6 +22,7 @@ function Header() {
   const closeMenu = () => setMenuOpened(false);
   const isAuth = useSelector(isAuthenticated);
   const userData = useSelector(getUserData);
+  const location = useLocation();
 
   const signOut = () => {
     dispatch(doAuthSignOut());
@@ -91,6 +92,11 @@ function Header() {
               </div>
             </div>
           </>
+        )}
+        {!isAuth && location.pathname !== "/login" && (
+          <Link to="/login" className="text-white pr-3">
+            Iniciar sesión
+          </Link>
         )}
       </nav>
     </header>

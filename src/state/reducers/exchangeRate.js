@@ -35,6 +35,7 @@ function applyFetchInitExchangeRate(state) {
 
 function applyFetchSuccessExchangeRate(state, action) {
   return {
+    ...state,
     rate: action.payload.rate,
     lastUpdated: action.payload.date,
     error: null,

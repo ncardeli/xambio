@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { getExchangeRate } from "state/selectors/exchangeRate";
 import { ButtonLink } from "./Button";
 import Panel from "./Panel";
+import paths from "./paths";
 import Spinner from "./Spinner";
 import { getClassesByType } from "./styling";
 
@@ -20,11 +21,16 @@ function Home() {
           type="sell"
           mode="normal"
           className="mx-2 flex-1"
-          to="/sell"
+          to={paths.SELL}
         >
           Vender
         </ButtonLink>
-        <ButtonLink type="buy" mode="normal" className="mx-2 flex-1" to="/buy">
+        <ButtonLink
+          type="buy"
+          mode="normal"
+          className="mx-2 flex-1"
+          to={paths.BUY}
+        >
           Comprar
         </ButtonLink>
       </nav>

@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { getExchangeRate } from "state/selectors/exchangeRate";
 import Spinner from "./Spinner";
 import { LOCAL_CURRENCY } from "../constants";
+import paths from "./paths";
 
 function Bid({
   submitButtonLabel,
@@ -92,7 +93,10 @@ function Bid({
         >
           {submitButtonLabel}
         </Button>
-        <ButtonLink to="/" className="block text-sm my-2 w-full text-center">
+        <ButtonLink
+          to={paths.ROOT}
+          className="block text-sm my-2 w-full text-center"
+        >
           {cancelButtonLabel}
         </ButtonLink>
       </form>

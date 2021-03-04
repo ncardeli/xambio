@@ -22,8 +22,9 @@ import PrivateRoute from "./PrivateRoute";
 import { useDispatch, useSelector } from "react-redux";
 import { hasActiveBid, isActiveBidMatched } from "../state/selectors/activeBid";
 import { doFetchExchangeRate } from "state/actions/exchangeRate";
-import { getUserData, isAuthenticated } from "state/selectors/auth";
+import { getUserData, isUserAuthenticated } from "state/selectors/auth";
 import { doFetchActiveBid } from "state/actions/activeBid";
+import paths from "./paths";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ function App() {
     dispatch(doFetchExchangeRate());
   }, [dispatch]);
 
-  const isAuth = useSelector(isAuthenticated);
+  const isAuth = useSelector(isUserAuthenticated);
   const { id: uid } = useSelector(getUserData);
 
   React.useEffect(() => {
@@ -50,21 +51,24 @@ function App() {
       <main className="App mt-8">
         <Switch>
           <PrivateRoute
-            path="/history/:id"
+            path={`${paths.HISTORY}/:id`}
             render={({ match }) => <HistoryOperation id={match.params.id} />}
           ></PrivateRoute>
-          <Route path="/login">
+          <Route path={paths.LOGIN}>
             <Login />
           </Route>
-          <PrivateRoute path="/history" component={History} />
+          <PrivateRoute path={paths.HISTORY} component={History} />
           {isActive && (
             <Route path="/(.+)">
-              <Redirect to="/"></Redirect>
+              <Redirect to={paths.ROOT}></Redirect>
             </Route>
           )}
-          <PrivateRoute path="/sell" render={() => <Sell />}></PrivateRoute>
-          <PrivateRoute path="/buy" render={() => <Buy />}></PrivateRoute>
-          <Route path="/">
+          <PrivateRoute
+            path={paths.SELL}
+            render={() => <Sell />}
+          ></PrivateRoute>
+          <PrivateRoute path={paths.BUY} render={() => <Buy />}></PrivateRoute>
+          <Route path={paths.ROOT}>
             {isAuth && isActive ? (
               isMatched ? (
                 <Match></Match>

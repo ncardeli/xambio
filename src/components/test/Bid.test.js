@@ -5,6 +5,7 @@ import { createMemoryHistory } from "history";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import Bid from "../Bid";
+import paths from "components/paths";
 
 const bidType = "buy";
 const submitButtonLabel = "Submit button text";
@@ -27,7 +28,7 @@ const initialState = {
 
 const mockStore = configureStore();
 
-function renderWithRouterAndRedux(child, initialRoute = "/") {
+function renderWithRouterAndRedux(child, initialRoute = paths.ROOT) {
   const history = createMemoryHistory(initialRoute);
   const store = mockStore(initialState);
   return {

@@ -4,12 +4,13 @@ import { StyledFirebaseAuth } from "react-firebaseui";
 import firebase from "firebase.js";
 import { doAuthCleanUp, doAuthWithSocialMedia } from "state/actions/auth";
 import Panel from "./Panel";
-import { isAuthenticated } from "state/selectors/auth";
+import { isUserAuthenticated } from "state/selectors/auth";
 import { Redirect } from "react-router-dom";
+import paths from "./paths";
 
 function Login() {
   const dispatch = useDispatch();
-  const isAuth = useSelector(isAuthenticated);
+  const isAuth = useSelector(isUserAuthenticated);
 
   React.useEffect(() => {
     dispatch(doAuthCleanUp());
@@ -21,7 +22,7 @@ function Login() {
 
   const onSignInFailHandler = () => {};
 
-  const redirect = isAuth && <Redirect to={"/"} />;
+  const redirect = isAuth && <Redirect to={paths.ROOT} />;
 
   return (
     <Panel type="main" title="Inicia sesión para continuar">
@@ -41,7 +42,7 @@ function uiConfig(onSignInSuccessHandler, onSignInFailHandler) {
       signInFailure: onSignInFailHandler,
     },
     signInFlow: "popup",
-    signInSuccessUrl: "/home",
+    signInSuccessUrl: paths.ROOT,
     signInOptions: [
       {
         provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,

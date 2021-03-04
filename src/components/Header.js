@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import overflowIcon from "../assets/overflow.svg";
 import closeIcon from "../assets/close.svg";
 import logo from "../assets/logo.svg";
-import { getUserData, isAuthenticated } from "state/selectors/auth";
+import { getUserData, isUserAuthenticated } from "state/selectors/auth";
 import { doAuthSignOut } from "state/actions/auth";
+import paths from "./paths";
 
 const menuOptions = [
   {
     text: "Historial",
-    url: "/history",
+    url: paths.HISTORY,
   },
 ];
 
@@ -20,7 +21,7 @@ function Header() {
   const [isMenuOpened, setMenuOpened] = useState(false);
   const toggleMenu = () => setMenuOpened(!isMenuOpened);
   const closeMenu = () => setMenuOpened(false);
-  const isAuth = useSelector(isAuthenticated);
+  const isAuth = useSelector(isUserAuthenticated);
   const userData = useSelector(getUserData);
   const location = useLocation();
 
@@ -32,7 +33,7 @@ function Header() {
     <header>
       <nav className="flex items-center justify-between flex-wrap bg-gray-700 p-4 mb-4">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
-          <Link to="/" onClick={closeMenu} className="flex flex-row">
+          <Link to={paths.ROOT} onClick={closeMenu} className="flex flex-row">
             <img
               src={logo}
               className="w-8 mr-4"
@@ -83,7 +84,7 @@ function Header() {
                   </Link>
                 ))}
                 <Link
-                  to="/"
+                  to={paths.ROOT}
                   className="block mt-4 ml-auto text-gray-300 hover:text-white mr-4 text-right"
                   onClick={signOut}
                 >
@@ -93,8 +94,8 @@ function Header() {
             </div>
           </>
         )}
-        {!isAuth && location.pathname !== "/login" && (
-          <Link to="/login" className="text-white pr-3">
+        {!isAuth && location.pathname !== paths.LOGIN && (
+          <Link to={paths.LOGIN} className="text-white pr-3">
             Iniciar sesión
           </Link>
         )}

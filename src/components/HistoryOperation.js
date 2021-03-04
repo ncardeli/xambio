@@ -9,6 +9,7 @@ import {
 import { ButtonLink } from "./Button";
 import { resolveBidStatus } from "./util/bid";
 import { LOCAL_CURRENCY, DOLLARS_CURRENCY } from "../constants";
+import paths from "./paths";
 
 function HistoryOperation({ id }) {
   const {
@@ -65,7 +66,7 @@ function HistoryOperation({ id }) {
       <ButtonLink
         type="main"
         mode="inverse"
-        to="/history"
+        to={paths.HISTORY}
         className="block mt-8 width-full"
       >
         Volver

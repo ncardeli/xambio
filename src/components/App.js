@@ -1,10 +1,6 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { AnimatedSwitch } from "react-router-transition";
 
 import "./App.css";
 
@@ -49,7 +45,12 @@ function App() {
     <Router>
       <Header></Header>
       <main className="App mt-8">
-        <Switch>
+        <AnimatedSwitch
+          atEnter={{ opacity: 0 }}
+          atLeave={{ opacity: 0 }}
+          atActive={{ opacity: 1 }}
+          className="switch-wrapper"
+        >
           <PrivateRoute
             path={`${paths.HISTORY}/:id`}
             render={({ match }) => <HistoryOperation id={match.params.id} />}
@@ -79,7 +80,7 @@ function App() {
               <Home />
             )}
           </Route>
-        </Switch>
+        </AnimatedSwitch>
       </main>
     </Router>
   );

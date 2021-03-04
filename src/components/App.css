@@ -1,5 +1,13 @@
 .App {
-	min-height: calc(100vh - 86px);
-	display: flex;
-	flex-direction: column;
+  min-height: calc(100vh - 86px);
+}
+
+.switch-wrapper {
+  position: relative;
+}
+
+.switch-wrapper > div {
+  position: absolute;
+  left: 0;
+  right: 0;
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { AnimatedSwitch } from "react-router-transition";
 
@@ -12,7 +12,7 @@ import Match from "./Match";
 import Header from "./Header";
 import History from "./History";
 import HistoryOperation from "./HistoryOperation";
-import Login from "./Login";
+import Skeleton from "./Skeleton";
 import PrivateRoute from "./PrivateRoute";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,8 @@ import { doFetchExchangeRate } from "state/actions/exchangeRate";
 import { getUserData, isUserAuthenticated } from "state/selectors/auth";
 import { doFetchActiveBid } from "state/actions/activeBid";
 import paths from "./paths";
+
+const Login = React.lazy(() => import("./Login.js"));
 
 function App() {
   const dispatch = useDispatch();
@@ -56,7 +58,9 @@ function App() {
             render={({ match }) => <HistoryOperation id={match.params.id} />}
           ></PrivateRoute>
           <Route path={paths.LOGIN}>
-            <Login />
+            <Suspense fallback={<Skeleton></Skeleton>}>
+              <Login />
+            </Suspense>
           </Route>
           <PrivateRoute path={paths.HISTORY} component={History} />
           {isActive && (

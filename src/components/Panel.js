@@ -8,7 +8,7 @@ function Panel({ title, type, className, children }) {
     <section
       className={`max-w-lg mx-auto p-10 ${backgroundColor} ${textColor} rounded-lg shadow-2xl flex flex-col ${className}`}
     >
-      <h1 className={`mx-auto mb-6 text-2xl ${textColor} leading-tight`}>
+      <h1 className={`text-center mb-6 text-2xl ${textColor} leading-tight`}>
         {title}
       </h1>
       {children}

@@ -29,7 +29,7 @@ function App() {
 
   React.useEffect(() => {
     dispatch(doFetchExchangeRate());
-  }, [dispatch]);
+  }, []);
 
   const isAuth = useSelector(isUserAuthenticated);
   const { id: uid } = useSelector(getUserData);
@@ -38,7 +38,7 @@ function App() {
     if (isAuth) {
       dispatch(doFetchActiveBid({ uid }));
     }
-  }, [dispatch, isAuth, uid]);
+  }, [isAuth, uid]);
 
   const isActive = useSelector(hasActiveBid);
   const isMatched = useSelector(isActiveBidMatched);

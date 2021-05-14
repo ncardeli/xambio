@@ -14,7 +14,7 @@ function Login() {
 
   React.useEffect(() => {
     dispatch(doAuthCleanUp());
-  }, [dispatch]);
+  }, []);
 
   const onSignInSuccessHandler = (authResult) => {
     dispatch(doAuthWithSocialMedia(authResult));

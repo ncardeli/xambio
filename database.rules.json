@@ -1,6 +1,16 @@
 {
   "rules": {
-    ".read": false,
-    ".write": false
+    ".read": true,
+    ".write": true
+    // "users": {
+    //   "$user": {
+    //     ".write": "auth !== null && auth.uid === $user",
+    //     ".read": "auth !== null && auth.uid === $user"
+    //   }
+    // },
+    // "bids": {
+    //   ".write": "auth !== null && auth.uid === data.child('uid').val()",
+    //   ".read": "auth !== null && auth.uid === data.child('uid').val()"
+    // }
   }
 }

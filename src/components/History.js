@@ -19,7 +19,7 @@ function History() {
 
   useEffect(() => {
     dispatch(doFetchHistory({ uid }));
-  }, [dispatch, uid]);
+  }, [uid]);
 
   const history = useSelector(getHistory);
   const browserHistory = useHistory();
@@ -53,7 +53,7 @@ function History() {
                   className={`absolute h-full inset-y-0 left-0 border-l-4 ${borderColor}`}
                 ></div>
                 <h3 className="mb-2">{text}</h3>
-                <div>
+                <div className="text-sm">
                   <img
                     className="inline pr-2"
                     src={statusIcon}
